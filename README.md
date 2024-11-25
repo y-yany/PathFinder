@@ -1,35 +1,8 @@
 # サービス名：
 
-## 画面遷移図
-Figma:https://www.figma.com/design/W2xsyZjZf25z0ACYPlbqHG/%E6%95%A3%E6%AD%A9%E3%82%B3%E3%83%BC%E3%82%B9%E6%8A%95%E7%A8%BF%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&t=gEtpL6e3LhhTj3po-1
-
-### READMEに記載した機能
-- [x] 会員登録機能
-- [x] ログイン・ログアウト機能
-- [x] Google認証機能
-- [x] パスワードリセット機能
-- [x] コース一覧・検索機能
-- [x] コース詳細閲覧機能
-- [x] コース作成機能
-- [x] コース編集・削除機能
-- [x] コメント投稿機能
-- [x] コースのブックマーク機能
-- [x] いいね機能
-- [x] マイページ機能
-- [x] Xシェア機能
-- [x] お問い合わせ
-- [x] 利用規約
-- [x] プライバシーポリシー
-
-### 未ログインでも閲覧または利用できるページ
-- [x] コース一覧・検索機能
-- [x] コース詳細閲覧機能
-
-### パスワード変更確認項目
-- [x] パスワード
-
-### 各画面の作り込み
-- [x] 作り込みはある程度完了している（Figmaを見て画面の作成ができる状態にある）
+## ER図
+dbdiagram:https://dbdiagram.io/d/6742dd75e9daa85aca81ae8f
+[![Image from Gyazo](https://i.gyazo.com/4d91d3f0b63c513268c33b2eba129992.png)](https://gyazo.com/4d91d3f0b63c513268c33b2eba129992)
 
 ## サービス概要
 散歩コースを共有・検索できるサービスです。
@@ -119,3 +92,6 @@ Figma:https://www.figma.com/design/W2xsyZjZf25z0ACYPlbqHG/%E6%95%A3%E6%AD%A9%E3%
   - Google Maps Geolocation APIで現在地取得・現在地周辺のコースを表示
 - コース検索機能
   - マルチ検索
+
+  ## 画面遷移図
+Figma:https://www.figma.com/design/W2xsyZjZf25z0ACYPlbqHG/%E6%95%A3%E6%AD%A9%E3%82%B3%E3%83%BC%E3%82%B9%E6%8A%95%E7%A8%BF%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&t=gEtpL6e3LhhTj3po-1
