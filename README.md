@@ -2,7 +2,7 @@
 
 ## ER図
 dbdiagram:https://dbdiagram.io/d/6742dd75e9daa85aca81ae8f
-[![Image from Gyazo](https://i.gyazo.com/4d91d3f0b63c513268c33b2eba129992.png)](https://gyazo.com/4d91d3f0b63c513268c33b2eba129992)
+[![Image from Gyazo](https://i.gyazo.com/5e316aed424bcaa57cca4a14f4ed9778.png)](https://gyazo.com/5e316aed424bcaa57cca4a14f4ed9778)
 
 ## サービス概要
 散歩コースを共有・検索できるサービスです。
