@@ -11,6 +11,12 @@
   </head>
 
   <body>
+    <!-- ヘッダー -->
+    <%= render 'shared/header' %>
     <%= yield %>
+    <!-- フッター -->
+    <div class="fixed bottom-0 w-full">
+      <%= render 'shared/footer' %>
+    </div>
   </body>
 </html>
