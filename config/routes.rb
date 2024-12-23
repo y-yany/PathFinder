@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    passwords: 'users/passwords',
     registrations: 'users/registrations'
-  }
+  }, skip: [:registrations]
+  devise_scope :user do
+    get 'signup', to: 'users/registrations#new', as: :new_user_registration
+    post 'signup', to: 'users/registrations#create', as: :user_registration
+  end
 
   root "home#index"
 end
