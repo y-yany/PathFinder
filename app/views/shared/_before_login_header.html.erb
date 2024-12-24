@@ -8,10 +8,8 @@
     <div class="flex flex-1 justify-end px-2">
       <div class="flex items-stretch">
         <%= link_to 'コース一覧', '#', class: "btn btn-ghost"%>
-
-        <%# ログイン済みユーザー向け %>
-        <%= link_to 'コース作成', '#', class: "btn btn-ghost"%>
-        <%= link_to 'ログアウト', '#', class: "btn btn-ghost"%>
+        <%= link_to '新規登録', new_user_registration_path, class: "btn btn-ghost"%>
+        <%= link_to 'ログイン', new_user_session_path, class: "btn btn-ghost"%>
       </div>
     </div>
   </div>
