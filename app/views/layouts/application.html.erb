@@ -12,8 +12,10 @@
 
   <body>
     <!-- ヘッダー -->
-    <%= render 'shared/header' %>
+    <%= render user_signed_in? ? 'shared/header' : 'shared/before_login_header' %>
+
     <%= yield %>
+
     <!-- フッター -->
     <div class="fixed bottom-0 w-full">
       <%= render 'shared/footer' %>
