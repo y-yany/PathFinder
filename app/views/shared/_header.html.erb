@@ -7,11 +7,11 @@
     </div>
     <div class="flex flex-1 justify-end px-2">
       <div class="flex items-stretch">
-        <%= link_to 'コース一覧', '#', class: "btn btn-ghost"%>
+        <%= link_to t('header.course_index'), '#', class: "btn btn-ghost"%>
 
         <%# ログイン済みユーザー向け %>
-        <%= link_to 'コース作成', '#', class: "btn btn-ghost"%>
-        <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost"%>
+        <%= link_to t('header.course_create'), '#', class: "btn btn-ghost"%>
+        <%= link_to t('header.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost"%>
       </div>
     </div>
   </div>
