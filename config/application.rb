@@ -26,5 +26,8 @@ module Myapp
       g.helper false
       g.test_framework nil
     end
+
+    # デフォルトのロケールを変更
+    config.i18n.default_locale = :ja
   end
 end
