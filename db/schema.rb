@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_29_053052) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_29_055035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -25,6 +25,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_29_053052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  create_table "markers", force: :cascade do |t|
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.integer "order"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "order"], name: "index_markers_on_course_id_and_order", unique: true
+    t.index ["course_id"], name: "index_markers_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,4 +55,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_29_053052) do
   end
 
   add_foreign_key "courses", "users"
+  add_foreign_key "markers", "courses"
 end
