@@ -1,7 +1,7 @@
 class CreateMarkers < ActiveRecord::Migration[7.0]
   def change
     create_table :markers do |t|
-      t.st_point :location, geographic: true
+      t.st_point :location, geographic: true, null: false
       t.integer :order
       t.references :course, foreign_key: true
 

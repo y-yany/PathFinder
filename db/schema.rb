@@ -16,11 +16,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_29_055035) do
   enable_extension "postgis"
 
   create_table "courses", force: :cascade do |t|
-    t.string "title", default: "", null: false
-    t.text "body"
+    t.string "title", null: false
+    t.text "body", default: ""
     t.decimal "distance", precision: 5, scale: 2
-    t.string "address"
-    t.string "encoded_polyline", default: "", null: false
+    t.string "address", default: ""
+    t.string "encoded_polyline", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_29_055035) do
   end
 
   create_table "markers", force: :cascade do |t|
-    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.integer "order"
     t.bigint "course_id"
     t.datetime "created_at", null: false
