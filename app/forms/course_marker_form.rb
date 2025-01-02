@@ -5,7 +5,7 @@ class CourseMarkerForm
 
   # 属性
   attribute :title, :string
-  attribute :body, :text
+  attribute :body, :string
   attribute :distance, :decimal
   attribute :address, :string
   attribute :encoded_polyline, :string
@@ -18,7 +18,7 @@ class CourseMarkerForm
   def save
     course = Course.create(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, user_id: user_id)
     positions.each_with_index do |position, index|
-      location = "POINT(#{position[:lat]} #{position[:lng]})"
+      location = "POINT(#{position["lat"]} #{position["lng"]})"
       Marker.create(location: location, order: index, course_id: course.id)
     end
   end
