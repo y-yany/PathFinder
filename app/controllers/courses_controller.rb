@@ -1,4 +1,8 @@
 class CoursesController < ApplicationController
+  def new
+    @course_marker_form = CourseMarkerForm.new
+  end
+
   def create
     @course_marker_form = CourseMarkerForm.new(course_marker_params)
     if @course_marker_form.save
@@ -12,6 +16,6 @@ class CoursesController < ApplicationController
   private
 
   def course_marker_params
-    params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, positions: []).merge(user_id: current_user.id)
+    params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, :positions).merge(user_id: current_user.id)
   end
 end
