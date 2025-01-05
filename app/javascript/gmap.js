@@ -3,6 +3,8 @@ let map;
 async function initMap() {
   // 必要なライブラリをインポート
   const { Map } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  let DirectionsService = await google.maps.importLibrary("routes");
 
   // マップのオプションを設定
   const defaultLocation = { lat: 35.6809591, lng: 139.7673068 };
