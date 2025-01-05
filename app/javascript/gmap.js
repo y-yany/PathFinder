@@ -1,7 +1,8 @@
 let map;
-let route_points = [];
+let routePoints = [];
 let directionsService;
 let routePolyline;
+let totalDistance = 0;
 
 async function initMap() {
   // 必要なライブラリをインポート
@@ -21,30 +22,33 @@ async function initMap() {
   };
 
   // マップオブジェクトの作成
-  map = new Map(document.getElementById("create_map"), mapOptions);
+  map = new Map(document.getElementById("create-map"), mapOptions);
 
   // マップをクリックした時の動作
   map.addListener('click', (e) => {
     if (!e.placeId) {
-      route_points.push(e.latLng);
+      routePoints.push(e.latLng);
     }
     calcRoute();
   });
+
+  // フォームに値を追加
+  addValueToForm();
 }
 
 initMap();
 
-// ルート計算
+// !ルート計算
 function calcRoute() {
-  if (route_points.length < 2) {
+  if (routePoints.length < 2) {
     return;
   } else {
     resetPolyline(routePolyline); // ポリラインのリセット
 
     // ルートの条件
-    const start = route_points[0];
-    const end = route_points[route_points.length - 1];
-    const waypts = route_points.slice(1, -1).map(point => ({
+    const start = routePoints[0];
+    const end = routePoints[routePoints.length - 1];
+    const waypts = routePoints.slice(1, -1).map(point => ({
       location: point,
       stopover: true,
     }));
@@ -64,6 +68,7 @@ function calcRoute() {
           const route = response.routes[0]; // ルート計算の結果からルート情報を取得
           const encodedPolyline = route.overview_polyline; // ルートのポリラインデータを取得
           drawPolyline(encodedPolyline);
+          calcTotalDistance(route);
         }
       });
     }
@@ -71,7 +76,7 @@ function calcRoute() {
 }
 window.calcRoute = calcRoute;
 
-// ポリラインデータをマップ上に描写
+// !ポリラインデータをマップ上に描写
 function drawPolyline(encodedPolyline) {
   const routeCoordinates = google.maps.geometry.encoding.decodePath(encodedPolyline); // エンコードされたパスをデコード
 
@@ -88,7 +93,7 @@ function drawPolyline(encodedPolyline) {
 }
 window.drawPolyline = drawPolyline;
 
-// ポリラインをマップ上から除去
+// !ポリラインをマップ上から除去
 function resetPolyline(routePolyline) {
   if (routePolyline) {
     routePolyline.setMap(null);
@@ -96,3 +101,27 @@ function resetPolyline(routePolyline) {
   }
 }
 window.resetPolyline = resetPolyline;
+
+// !ルートの総距離を計算
+function calcTotalDistance(route) {
+  route.legs.forEach((leg) => {
+    totalDistance += leg.distance.value / 1_000; // 総距離kmを算出
+  });
+}
+window.calcTotalDistance = calcTotalDistance;
+
+// !フォームに値を追加
+function addValueToForm() {
+  const form = document.getElementById("course-form");
+  form.addEventListener('submit', (e) => {
+    // コースの距離
+    const distanceField = e.target.querySelector('#course-distance-field');
+    distanceField.value = totalDistance;
+
+    // コースの始点の住所
+    const addressField = e.target.querySelector('#course-address-field');
+    // addressField.value = 
+    // console.log(e.target);
+  })
+}
+window.addValueToForm = addValueToForm;

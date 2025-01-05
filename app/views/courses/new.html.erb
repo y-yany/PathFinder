@@ -3,7 +3,7 @@
 
   <div class="grid grid-cols-3 gap-4">  
     <div class="col-span-1">
-      <%= form_with model: @course_marker_form, url: courses_path, method: :post, local: true do |f| %>
+      <%= form_with model: @course_marker_form, url: courses_path, method: :post, local: true, id: "course-form" do |f| %>
         <div class="mb-3">
           <%= f.label :title, class: "label" %>
           <%= f.text_field :title, autofocus: true, class: "input input-bordered" %>
@@ -14,17 +14,17 @@
           <%= f.text_area :body, class: "textarea textarea-bordered", rows: 5 %>
         </div>
 
-        <%= f.hidden_field :distance, id: "course_distance_field" %> <%# 距離を送信するためのフィールド %>
-        <%= f.hidden_field :address, id: "course_address_field" %> <%# コースの始点を送信するためのフィールド %>
-        <%= f.hidden_field :encoded_polyline, id: "course_encoded_polyline_field" %> <%# ポリラインデータを送信するためのフィールド %>
-        <%= f.hidden_field :positions, id: "marker_positions_field" %> <%# コースのマーカーの位置情報を送信するためのフィールド %>
+        <%= f.hidden_field :distance, id: "course-distance-field" %> <%# 距離を送信するためのフィールド %>
+        <%= f.hidden_field :address, id: "course-address-field" %> <%# コースの始点を送信するためのフィールド %>
+        <%= f.hidden_field :encoded_polyline, id: "course-encoded-polyline-field" %> <%# ポリラインデータを送信するためのフィールド %>
+        <%= f.hidden_field :positions, id: "marker-positions-field" %> <%# コースのマーカーの位置情報を送信するためのフィールド %>
 
         <%= f.submit "作成", class: "btn btn-accent" %>
       <% end %>
     </div>
     <div class="col-span-2">
       <div class="h-screen">
-        <div id="create_map" style="width: 100%; height: 100%;"></div>
+        <div id="create-map" style="width: 100%; height: 100%;"></div>
       </div>
     </div>
   </div>
