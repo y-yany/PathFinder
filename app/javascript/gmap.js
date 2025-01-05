@@ -60,9 +60,27 @@ function calcRoute() {
         if (status == 'OK') {
           const route = response.routes[0]; // ルート計算の結果からルート情報を取得
           const encodedPolyline = route.overview_polyline; // ルートのポリラインデータを取得
+          drawPolyline(encodedPolyline);
         }
       });
     }
   }
 }
 window.calcRoute = calcRoute;
+
+// ポリラインデータをマップ上に描写
+function drawPolyline(encodedPolyline) {
+  const routeCoordinates = google.maps.geometry.encoding.decodePath(encodedPolyline); // エンコードされたパスをデコード
+
+  // ポリラインオブジェクトの作成
+  const routePolyline = new google.maps.Polyline({
+    path: routeCoordinates,
+    geodesic: true, // 地球の曲率を考慮した直線
+    strokeColor: "#ff7f50",
+    strokeOpacity: 0.9,
+    strokeWeight: 8,
+  });
+
+  routePolyline.setMap(map);
+}
+window.drawPolyline = drawPolyline;
