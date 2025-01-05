@@ -1,6 +1,7 @@
 let map;
 let route_points = [];
 let directionsService;
+let routePolyline;
 
 async function initMap() {
   // 必要なライブラリをインポート
@@ -38,6 +39,8 @@ function calcRoute() {
   if (route_points.length < 2) {
     return;
   } else {
+    resetPolyline(routePolyline); // ポリラインのリセット
+
     // ルートの条件
     const start = route_points[0];
     const end = route_points[route_points.length - 1];
@@ -73,14 +76,23 @@ function drawPolyline(encodedPolyline) {
   const routeCoordinates = google.maps.geometry.encoding.decodePath(encodedPolyline); // エンコードされたパスをデコード
 
   // ポリラインオブジェクトの作成
-  const routePolyline = new google.maps.Polyline({
+  routePolyline = new google.maps.Polyline({
     path: routeCoordinates,
     geodesic: true, // 地球の曲率を考慮した直線
-    strokeColor: "#ff7f50",
-    strokeOpacity: 0.9,
-    strokeWeight: 8,
+    strokeColor: "#ff7f50", // ポリラインの色
+    strokeOpacity: 0.9, // ポリラインの透過度
+    strokeWeight: 7, // ポリラインの太さ
   });
 
   routePolyline.setMap(map);
 }
 window.drawPolyline = drawPolyline;
+
+// ポリラインをマップ上から除去
+function resetPolyline(routePolyline) {
+  if (routePolyline) {
+    routePolyline.setMap(null);
+    routePolyline = null;
+  }
+}
+window.resetPolyline = resetPolyline;
