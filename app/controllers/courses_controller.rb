@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   def new
     @course_marker_form = CourseMarkerForm.new
+    gon.google_map_id = Rails.application.credentials.google_maps_mapId
   end
 
   def create

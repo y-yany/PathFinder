@@ -14,6 +14,7 @@ async function initMap() {
     streetViewControl: false, // ストリートビューのボタン非表示
     mapTypeControl: false, // 地図、航空写真のボタン非表示
     fullscreenControl: false, // フルスクリーンボタン非表示
+    mapId: gon.google_map_id,
   };
 
   // マップオブジェクトの作成
