@@ -3,6 +3,7 @@ let routePoints = [];
 let directionsService;
 let routePolyline;
 let totalDistance = 0;
+let startAddress;
 
 async function initMap() {
   // 必要なライブラリをインポート
@@ -69,6 +70,7 @@ function calcRoute() {
           const encodedPolyline = route.overview_polyline; // ルートのポリラインデータを取得
           drawPolyline(encodedPolyline);
           calcTotalDistance(route);
+          startAddress = route.legs[0].start_address; // ルートの始点の住所を取得
         }
       });
     }
@@ -120,7 +122,7 @@ function addValueToForm() {
 
     // コースの始点の住所
     const addressField = e.target.querySelector('#course-address-field');
-    // addressField.value = 
+    addressField.value = startAddress;
     // console.log(e.target);
   })
 }
