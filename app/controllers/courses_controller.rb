@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
     if @course_marker_form.save
       redirect_to root_path, success: "コースを作成しました"
     else
+      @course_marker_form = CourseMarkerForm.new
       flash.now[:error] = "コースを作成できませんでした"
       render :new, status: :unprocessable_entity
     end
