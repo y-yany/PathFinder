@@ -1,12 +1,15 @@
 let map;
 let directionsService;
-let routePolyline; // ルートのポリラインオブジェクト
 
 async function initMap() {
   // 必要なライブラリをインポート
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   directionsService = await new google.maps.DirectionsService();
+
+  // 変数を定義
+  const routePoints = []; // ルートを構成する座標データ
+  let routePolyline; // ポリラインオブジェクト
 
   // マップのオプションを設定
   const defaultLocation = { lat: 35.6809591, lng: 139.7673068 };
@@ -23,8 +26,7 @@ async function initMap() {
   map = new Map(document.getElementById("create-map"), mapOptions);
 
   // マップをクリックした時の動作
-  const routePoints = []; // ルートを構成する座標データ
-  map.addListener('click', (e) => {
+  map.addListener('click', async (e) => {
     if (!e.placeId) {
       routePoints.push(e.latLng);
     }
@@ -32,14 +34,13 @@ async function initMap() {
     if (routePoints.length >= 2) {
       resetPolyline(routePolyline); // マップに描写されているポリラインを削除
 
-      calcRoute(routePoints) // ルートを計算
-        .then(route => {
-          const encodedPolyline = getEncodedPolyline(route); // ポリラインデータを取得
-          routePolyline = getPolylineObject(encodedPolyline); // ポリラインオブジェクトを作成
-          routePolyline.setMap(map); // ルートをマップ上に描写
+      const route = await calcRoute(routePoints) // ルートを計算
 
-          addValueToForm(route, routePoints); // フォームにデータを追加
-        });
+      const encodedPolyline = getEncodedPolyline(route); // ポリラインデータを取得
+      routePolyline = getPolylineObject(encodedPolyline); // ポリラインオブジェクトを作成
+      routePolyline.setMap(map); // ルートをマップ上に描写
+
+      addValueToForm(route, routePoints); // フォームにデータを追加
     }
   });
 }
@@ -47,7 +48,7 @@ async function initMap() {
 initMap();
 
 // !ルート計算
-function calcRoute(routePoints) {
+async function calcRoute(routePoints) {
   // ルートの条件
   const start = routePoints[0];
   const end = routePoints[routePoints.length - 1];
@@ -67,7 +68,7 @@ function calcRoute(routePoints) {
   }
   
   // 計算
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     directionsService.route(request, (response, status) => {
       if (status == 'OK') {
         const route = response.routes[0]; // ルート計算の結果からルート情報を取得
