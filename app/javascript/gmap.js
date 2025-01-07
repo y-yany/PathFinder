@@ -35,7 +35,9 @@ async function initMap() {
       calcRoute(routePoints) // ルートを計算
         .then(route => {
           const encodedPolyline = getEncodedPolyline(route); // ポリラインデータを取得
-          drawPolyline(encodedPolyline); // ポリラインをマップ上に描写
+          routePolyline = getPolylineObject(encodedPolyline); // ポリラインオブジェクトを作成
+          routePolyline.setMap(map); // ルートをマップ上に描写
+
           addValueToForm(route, routePoints); // フォームにデータを追加
         });
     }
@@ -84,24 +86,18 @@ function getEncodedPolyline(route) {
 }
 window.getEncodedPolyline = getEncodedPolyline;
 
-// !ポリラインデータをマップ上に描写
-function drawPolyline(encodedPolyline) {
+// !ポリラインオブジェクトを作成
+function getPolylineObject(encodedPolyline) {
   const routeCoordinates = google.maps.geometry.encoding.decodePath(encodedPolyline); // エンコードされたパスをデコード
 
-  routePolyline = getPolylineObject(routeCoordinates); // ポリラインオブジェクトを作成
-  routePolyline.setMap(map);
-}
-window.drawPolyline = drawPolyline;
-
-// !ポリラインオブジェクトの作成
-function getPolylineObject(routeCoordinates) {
+  // ポリラインオブジェクトを作成
   const polylineObject = new google.maps.Polyline({
     path: routeCoordinates,
     geodesic: true, // 地球の曲率を考慮した直線
     strokeColor: "#ff7f50", // ポリラインの色
     strokeOpacity: 0.9, // ポリラインの透過度
     strokeWeight: 7, // ポリラインの太さ
-  });
+  })
 
   return polylineObject;
 }
