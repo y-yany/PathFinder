@@ -1,5 +1,4 @@
 let map;
-let routePoints = []; // ルートを構成する座標データ
 let directionsService;
 let routePolyline; // ルートのポリラインオブジェクト
 
@@ -24,6 +23,7 @@ async function initMap() {
   map = new Map(document.getElementById("create-map"), mapOptions);
 
   // マップをクリックした時の動作
+  const routePoints = []; // ルートを構成する座標データ
   map.addListener('click', (e) => {
     if (!e.placeId) {
       routePoints.push(e.latLng);
