@@ -16,10 +16,15 @@ class CourseMarkerForm
   validates :user_id, presence: true
 
   def save
-    course = Course.create(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, user_id: user_id)
-    positions.each_with_index do |position, index|
-      location = "POINT(#{position["lat"]} #{position["lng"]})"
-      Marker.create(location: location, order: index, course_id: course.id)
+    course = Course.new(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, user_id: user_id)
+    if course.save
+      positions.each_with_index do |position, index|
+        location = "POINT(#{position["lat"]} #{position["lng"]})"
+        Marker.create(location: location, order: index, course_id: course.id)
+      end
+      true
+    else
+      false
     end
   end
 end
