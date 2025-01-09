@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-1 justify-end px-2">
       <div class="flex items-stretch">
-        <%= link_to t('header.course_index'), '#', class: "btn btn-ghost"%>
+        <%= link_to t('header.course_index'), courses_path, class: "btn btn-ghost"%>
 
         <%# ログイン済みユーザー向け %>
         <%= link_to t('header.course_create'), new_course_path, class: "btn btn-ghost"%>
