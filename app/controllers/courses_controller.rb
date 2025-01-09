@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
+
   def index
     @courses = Course.includes(:marker)
   end
