@@ -1,4 +1,8 @@
 class CoursesController < ApplicationController
+  def index
+    @courses = Course.includes(:marker)
+  end
+
   def new
     @course_marker_form = CourseMarkerForm.new
     gon.google_map_id = Rails.application.credentials.google_maps_mapId
@@ -17,7 +21,7 @@ class CoursesController < ApplicationController
 
   private
 
-  def course_marker_params
+  def course_marker_param
     params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, :positions).merge(user_id: current_user.id)
   end
 end
