@@ -1,0 +1,15 @@
+<div id="course-id-<%= course.id %>">
+  <div class="card card-compact bg-base-100 w-72 shadow-xl my-3">
+    <figure>
+      <%= image_tag "course_placeholder.png", class: "rounded-xl", width: "300", height: "200" %>
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title"><%= link_to course.title, '#' %></h2>
+      <div class="card-actions">
+        <div class="badge badge-outline"><%= course.distance %> km</div>
+        <div class="badge badge-outline"><%= truncate course.address.split[1], length: 10 %></div> <%# ? decoratorを定義 %>
+      </div>
+      <p>ユーザー名：<%= course.user.name %></p>
+    </div>
+  </div>
+</div>

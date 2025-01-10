@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
+
   def index
-    @courses = Course.includes(:marker)
+    @courses = Course.includes(:user)
   end
 
   def new
@@ -21,7 +23,7 @@ class CoursesController < ApplicationController
 
   private
 
-  def course_marker_param
+  def course_marker_params
     params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, :positions).merge(user_id: current_user.id)
   end
 end
