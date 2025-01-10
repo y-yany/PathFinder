@@ -1,0 +1,11 @@
+<div class="container mx-auto pt-4">
+  <h1>コース一覧</h1>
+
+  <div class="grid grid-cols-4 gap-4">
+    <% if @courses.present? %>
+      <%= render @courses %>
+    <% else %>
+      <div class="mt-4">作成されたコースはありません</div>
+    <% end %>
+  </div>
+</div>
