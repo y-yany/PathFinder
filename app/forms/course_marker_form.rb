@@ -22,7 +22,7 @@ class CourseMarkerForm
         location = "POINT(#{position["lat"]} #{position["lng"]})"
         Marker.create(location: location, order: index, course_id: course.id)
       end
-      true
+      course.id
     else
       false
     end

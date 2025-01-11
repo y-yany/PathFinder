@@ -12,13 +12,18 @@ class CoursesController < ApplicationController
 
   def create
     @course_marker_form = CourseMarkerForm.new(course_marker_params)
-    if @course_marker_form.save
-      redirect_to root_path, success: "コースを作成しました"
+    course_id = @course_marker_form.save
+    if course_id
+      redirect_to course_path(id: course_id), success: "コースを作成しました"
     else
       @course_marker_form = CourseMarkerForm.new
       flash.now[:error] = "コースを作成できませんでした"
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @course = Course.find(params[:id])
   end
 
   private
