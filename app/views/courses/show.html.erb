@@ -1,0 +1,18 @@
+<div class="container mx-auto pt-4">
+  <h1>コース詳細</h1>
+
+  <div class="grid grid-cols-1 gap-4 mt-4">
+    <div>
+      <h2><%= @course.title %></h2>
+      <p>ユーザー名：<%= @course.user.name %></p>
+    </div>
+    <ul class="flex">
+      <li><%= @course.distance %> km</li>・
+      <li><%= @course.address %></li>
+    </ul>
+    <div class="grid grid-cols-4 gap-2">
+      <%= image_tag "course_placeholder.png" %>
+    </div>
+    <p><%= @course.body %></p>
+  </div>
+</div>
