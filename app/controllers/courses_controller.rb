@@ -33,6 +33,12 @@ class CoursesController < ApplicationController
     }
   end
 
+  def destroy
+    @course = current_user.courses.find(params[:id])
+    @course.destroy!
+    redirect_to courses_path, success: "コースを削除しました", status: :see_other
+  end
+
   private
 
   def course_marker_params
