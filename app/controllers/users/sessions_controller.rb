@@ -32,6 +32,6 @@ class Users::SessionsController < Devise::SessionsController
 
   # ログアウト後のリダイレクト先
   def after_sign_out_path_for(_resource)
-    root_path
+    courses_path
   end
 end
