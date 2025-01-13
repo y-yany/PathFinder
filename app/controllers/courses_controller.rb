@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
     gon.course_encoded_polyline = @course.encoded_polyline
     gon.start_position = {
       lat: @course.markers[0].location.latitude,
-      lng: @course.markers[0].location.longitude,
+      lng: @course.markers[0].location.longitude
     }
   end
 
