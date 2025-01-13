@@ -24,6 +24,13 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+
+    gon.google_map_id = Rails.application.credentials.google_maps_mapId
+    gon.course_encoded_polyline = @course.encoded_polyline
+    gon.start_position = {
+      lat: @course.markers[0].location.latitude,
+      lng: @course.markers[0].location.longitude,
+    }
   end
 
   private
