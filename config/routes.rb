@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post 'signup', to: 'users/registrations#create', as: :user_registration
   end
 
-  resources :courses, only: %i[index new create show]
+  resources :courses, only: %i[index new create show destroy]
 
   root "home#index"
 end
