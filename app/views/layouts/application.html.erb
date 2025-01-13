@@ -4,9 +4,6 @@
     <title>Myapp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <%# gem gonの設定 %>
-    <%= Gon::Base.render_data %>
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -28,6 +25,9 @@
 
     <%# フラッシュメッセージ %>
     <%= render 'shared/flash_message' %>
+
+    <%# gem gonの設定 %>
+    <%= Gon::Base.render_data %>
 
     <%= yield %>
 
