@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="flex">
         <h2 class="card-title"><%= link_to course.title, course_path(course) %></h2>
-        <% if current_user.own?(course) %>
+        <% if current_user&.own?(course) %>
           <%= link_to  "削除", course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "btn btn-link ml-auto" %>
         <% end %>
       </div>
