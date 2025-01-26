@@ -7,14 +7,24 @@
       <div class="flex">
         <h2 class="card-title"><%= link_to course.title, course_path(course) %></h2>
         <% if current_user&.own?(course) %>
-          <%= link_to  "削除", course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "btn btn-link ml-auto" %>
+          <%= link_to course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "ml-auto" do %>
+            <span class="material-icons text-primary">delete</span>
+          <% end %>
         <% end %>
       </div>
       <div class="card-actions">
-        <div class="badge badge-outline"><%= course.distance %> km</div>
-        <div class="badge badge-outline"><%= truncate course.address.split[1], length: 10 %></div> <%# ? decoratorを定義 %>
+        <div class="badge badge-outline gap-1">
+          <span class="material-icons text-base h-6">route</span>
+          <%= course.distance %> km</div>
+        <div class="badge badge-outline">
+          <span class="material-icons text-base w-5 h-6">explore_nearby</span>
+          <%= truncate course.address.split[1], length: 10 %>
+        </div>
       </div>
-      <p>ユーザー名：<%= course.user.name %></p>
+      <div class="flex items-center space-x-2">
+        <span class="material-icons">account_circle</span>
+        <span><%= course.user.name %></span>
+      </div>
     </div>
   </div>
 </div>
