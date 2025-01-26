@@ -1,5 +1,5 @@
 <div class="container mx-auto pt-4">
-  <h1>コース作成</h1>
+  <h1><%= t('.title') %></h1>
 
   <div class="grid grid-cols-3 gap-4">  
     <div class="col-span-1">
@@ -19,7 +19,7 @@
         <%= f.hidden_field :encoded_polyline, id: "course-encoded-polyline-field" %> <%# ポリラインデータを送信するためのフィールド %>
         <%= f.hidden_field :positions, id: "marker-positions-field" %> <%# コースのマーカーの位置情報を送信するためのフィールド %>
 
-        <%= f.submit "作成", class: "btn btn-accent" %>
+        <%= f.submit t('.create'), class: "btn btn-accent" %>
       <% end %>
     </div>
     <div class="col-span-2">
