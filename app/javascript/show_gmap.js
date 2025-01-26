@@ -1,3 +1,5 @@
+import { getPolylineObject } from "./gmap_common";
+
 let show_map;
 let googleMapId = gon.google_map_id;
 let courseEncodedPolyline = gon.course_encoded_polyline;
@@ -6,8 +8,7 @@ let startPosition = gon.start_position;
 async function initMap() {
   // 必要なライブラリをインポート
   const { Map } = await google.maps.importLibrary("maps");
-  const {encoding} = await google.maps.importLibrary("geometry");
-  const {Polyline} = await google.maps.importLibrary("maps")
+  const { encoding } = await google.maps.importLibrary("geometry");
 
   // マップのオプションを設定
   const mapOptions = {
@@ -23,15 +24,7 @@ async function initMap() {
   show_map = new Map(document.getElementById("show-map"), mapOptions);
 
   // ポリラインオブジェクトを作成し、コースをマップに描写
-  const routeCoordinates = new encoding.decodePath(courseEncodedPolyline);
-
-  const routePolyline = new Polyline({
-    path: routeCoordinates,
-    geodesic: true,
-    strokeColor: "#ff7f50",
-    strokeOpacity: 0.9,
-    strokeWeight: 7,
-  });
+  const routePolyline = getPolylineObject(courseEncodedPolyline);
   routePolyline.setMap(show_map);
 }
 
