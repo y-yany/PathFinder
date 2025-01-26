@@ -1,0 +1,10 @@
+ja:
+  courses:
+    index:
+      title: コース一覧
+    new:
+      title: コース作成
+      create: 作成
+    show:
+      title: コース詳細
+      to_course_index: コース一覧へ

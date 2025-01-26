@@ -1,10 +1,14 @@
+import { getPolylineObject } from "./gmap_common";
+
 let map;
+let googleMapId = gon.google_map_id;
 let directionsService;
 
 async function initMap() {
   // 必要なライブラリをインポート
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  const { encoding } = await google.maps.importLibrary("geometry");
   directionsService = await new google.maps.DirectionsService();
 
   // 変数を定義
@@ -19,7 +23,7 @@ async function initMap() {
     streetViewControl: false, // ストリートビューのボタン非表示
     mapTypeControl: false, // 地図、航空写真のボタン非表示
     fullscreenControl: false, // フルスクリーンボタン非表示
-    mapId: gon.google_map_id,
+    mapId: googleMapId,
   };
 
   // マップオブジェクトの作成
@@ -36,8 +40,7 @@ async function initMap() {
 
       const route = await calcRoute(routePoints) // ルートを計算
 
-      const encodedPolyline = getEncodedPolyline(route); // ポリラインデータを取得
-      routePolyline = getPolylineObject(encodedPolyline); // ポリラインオブジェクトを作成
+      routePolyline = getPolylineObject(route.overview_polyline); // ポリラインオブジェクトを作成
       routePolyline.setMap(map); // ルートをマップ上に描写
 
       addValueToForm(route, routePoints); // フォームにデータを追加
@@ -77,32 +80,6 @@ async function calcRoute(routePoints) {
     });
   })
 }
-window.calcRoute = calcRoute;
-
-// !ポリラインデータを取得
-function getEncodedPolyline(route) {
-  const encodedPolyline = route.overview_polyline; // ルートのポリラインデータを取得
-  
-  return encodedPolyline;
-}
-window.getEncodedPolyline = getEncodedPolyline;
-
-// !ポリラインオブジェクトを作成
-function getPolylineObject(encodedPolyline) {
-  const routeCoordinates = google.maps.geometry.encoding.decodePath(encodedPolyline); // エンコードされたパスをデコード
-
-  // ポリラインオブジェクトを作成
-  const polylineObject = new google.maps.Polyline({
-    path: routeCoordinates,
-    geodesic: true, // 地球の曲率を考慮した直線
-    strokeColor: "#ff7f50", // ポリラインの色
-    strokeOpacity: 0.9, // ポリラインの透過度
-    strokeWeight: 7, // ポリラインの太さ
-  })
-
-  return polylineObject;
-}
-window.getPolylineObject = getPolylineObject;
 
 // !ポリラインをマップ上から除去
 function resetPolyline(routePolyline) {
@@ -111,7 +88,6 @@ function resetPolyline(routePolyline) {
     routePolyline = null;
   }
 }
-window.resetPolyline = resetPolyline;
 
 // !ルートの総距離を計算
 function calcTotalDistance(route) {
@@ -123,7 +99,6 @@ function calcTotalDistance(route) {
 
   return totalDistance;
 }
-window.calcTotalDistance = calcTotalDistance;
 
 // !フォームに値を追加
 function addValueToForm(route, routePoints) {
@@ -140,7 +115,7 @@ function addValueToForm(route, routePoints) {
       
       // ポリラインデータ
       const encodedPolylineField = e.target.querySelector('#course-encoded-polyline-field');
-      encodedPolylineField.value = getEncodedPolyline(route);
+      encodedPolylineField.value = route.overview_polyline;
   
       // コースを構成する座標データ
       const positionsField = e.target.querySelector('#marker-positions-field');
@@ -148,4 +123,3 @@ function addValueToForm(route, routePoints) {
     })
   }
 }
-window.addValueToForm = addValueToForm;
