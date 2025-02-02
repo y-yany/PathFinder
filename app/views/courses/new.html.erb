@@ -22,8 +22,15 @@
         <%= f.submit t('.create'), class: "btn btn-accent" %>
       <% end %>
     </div>
-    <div class="col-span-2">
-      <p class="font-bold">マップをクリックしてコースを作成して下さい</p>
+
+    <div class="col-span-2 relative">
+      <%# マップ検索フォーム %>
+      <div class="absolute top-4 left-4 z-10 bg-white p-4 rounded-lg shadow-lg">
+          <input id="search-input" type="text" placeholder="検索ワードを入力" class="input input-bordered w-full max-w-xs" />
+          <ul id="suggested-locations" class="menu bg-base-200 rounded-box w-72"></ul>
+      </div>
+
+      <%# マップ %>
       <div class="h-screen">
         <div id="create-map" style="width: 100%; height: 80%;"></div>
       </div>
