@@ -1,11 +1,11 @@
-import { getPolylineObject } from "./gmap_common";
-
 let map;
 let googleMapId = gon.google_map_id;
 // ライブラリ
+let advancedMarkerElement;
 let directionsService;
 let autocompleteSessionToken;
 let autocompleteSuggestion;
+let geocoder;
 
 async function initMap() {
   // 必要なライブラリをインポート
@@ -14,7 +14,9 @@ async function initMap() {
   const { encoding } = await google.maps.importLibrary("geometry");
   directionsService = await new google.maps.DirectionsService();
   const { AutocompleteSessionToken, AutocompleteSuggestion } = await google.maps.importLibrary("places");
+  geocoder = await new google.maps.Geocoder();
 
+  advancedMarkerElement = AdvancedMarkerElement;
   autocompleteSessionToken = AutocompleteSessionToken;
   autocompleteSuggestion = AutocompleteSuggestion;
 
@@ -76,74 +78,9 @@ async function initMap() {
   autocompleteOptions = refreshToken(autocompleteOptions);
 }
 
+import { getPolylineObject } from "./gmap_common";
+
 initMap();
-
-// !autocompleteを用いて検索結果を表示
-async function makeAcRequest(request, input, results) {
-  // 入力値が空文字の場合、検索結果をリセット
-  if (input.target.value == "") {
-    results.replaceChildren();
-    return;
-  }
-  
-  // 検索結果をリセット
-  results.replaceChildren();
-  
-  // 入力文字をautocompleteのinputに設定
-  request.input = input.target.value;
-
-  console.log(request.sessionToken);
-
-  // 検索結果を取得
-  const { suggestions } =
-  await autocompleteSuggestion.fetchAutocompleteSuggestions(
-    request,
-  );
-
-  for (const suggestion of suggestions) {
-    const placePrediction = suggestion.placePrediction;
-    // 検索結果を表示するための要素を生成
-    const a = document.createElement("a");
-    a.classList.add("block");
-
-    // 検索候補選択時の処理
-    a.addEventListener("click", () => {
-      onPlaceSelected(placePrediction.toPlace());
-      input.target.value = "";
-      refreshToken(request);
-    });
-
-    a.innerText = placePrediction.mainText.toString();
-
-    // 詳細な住所を表示するための領域を生成
-    if (placePrediction.secondaryText) {
-      const span = document.createElement("span");
-      span.classList.add("text-xs", "text-gray-500", "truncate", "block");
-
-      span.innerText = placePrediction.secondaryText.toString();
-      a.appendChild(span);
-    }
-
-    // 検索候補を表示
-    const li = document.createElement("li");
-    li.appendChild(a);
-    results.appendChild(li);
-  }
-}
-
-// !検索候補クリック時の処理
-async function onPlaceSelected(place) {
-  await place.fetchFields ({
-    fields: ["id"],
-  });
-}
-
-// !session tokenをリセット
-function refreshToken(request) {
-  let token = new autocompleteSessionToken();
-  request.sessionToken = token;
-  return(request);
-}
 
 // !ルート計算
 async function calcRoute(routePoints) {
@@ -217,4 +154,84 @@ function addValueToForm(route, routePoints) {
       positionsField.value = JSON.stringify(routePoints);
     })
   }
+}
+
+// !autocompleteを用いて検索結果を表示
+async function makeAcRequest(request, input, results) {
+  // 入力値が空文字の場合、検索結果をリセット
+  if (input.target.value == "") {
+    results.replaceChildren();
+    return;
+  }
+
+  // 検索結果をリセット
+  results.replaceChildren();
+
+  // 入力文字をautocompleteのinputに設定
+  request.input = input.target.value;
+
+  // 検索結果を取得
+  const { suggestions } =
+  await autocompleteSuggestion.fetchAutocompleteSuggestions(
+    request,
+  );
+
+  for (const suggestion of suggestions) {
+    const placePrediction = suggestion.placePrediction;
+    // 検索結果を表示するための要素を生成
+    const a = document.createElement("a");
+    a.classList.add("block");
+
+    // 検索候補選択時の処理
+    a.addEventListener("click", () => {
+      onPlaceSelected(placePrediction.toPlace());
+      input.target.value = "";
+      results.replaceChildren();
+      refreshToken(request);
+    });
+
+    a.innerText = placePrediction.mainText.toString();
+
+    // 詳細な住所を表示するための領域を生成
+    if (placePrediction.secondaryText) {
+      const span = document.createElement("span");
+      span.classList.add("text-xs", "text-gray-500", "truncate", "block");
+
+      span.innerText = placePrediction.secondaryText.toString();
+      a.appendChild(span);
+    }
+
+    // 検索候補を表示
+    const li = document.createElement("li");
+    li.appendChild(a);
+    results.appendChild(li);
+  }
+}
+
+// !検索候補クリック時の処理
+async function onPlaceSelected(place) {
+  await place.fetchFields ({
+    fields: ["id"],
+  });
+
+  // placeIdから緯度経度を取得
+  geocoder.geocode({ placeId: place.id })
+    .then(({ results }) => {
+      if(results[0]) {
+        map.setZoom(16);
+        map.setCenter(results[0].geometry.location);
+
+        const marker = new advancedMarkerElement({
+          map,
+          position: results[0].geometry.location,
+        })
+      }
+    })
+}
+
+// !session tokenをリセット
+function refreshToken(request) {
+  let token = new autocompleteSessionToken();
+  request.sessionToken = token;
+  return(request);
 }
