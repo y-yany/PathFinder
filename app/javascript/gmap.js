@@ -42,6 +42,16 @@ async function initMap() {
   map.addListener('click', async (e) => {
     if (!e.placeId) {
       routePoints.push(e.latLng);
+
+      // マーカー作成
+      const icon = document.createElement("div");
+      icon.innerHTML = '<i class="material-icons text-accent">radio_button_checked</i>';
+
+      const courseCreateMarkerView = new AdvancedMarkerElement({
+        map,
+        position: e.latLng,
+        content: icon,
+      });
     }
 
     if (routePoints.length >= 2) {
