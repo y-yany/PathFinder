@@ -1,4 +1,5 @@
 let map;
+let markers = [];
 let googleMapId = gon.google_map_id;
 // ライブラリ
 let advancedMarkerElement;
@@ -43,15 +44,8 @@ async function initMap() {
     if (!e.placeId) {
       routePoints.push(e.latLng);
 
-      // マーカー作成
-      const icon = document.createElement("div");
-      icon.innerHTML = '<i class="material-icons text-accent">radio_button_checked</i>';
-
-      const courseCreateMarkerView = new AdvancedMarkerElement({
-        map,
-        position: e.latLng,
-        content: icon,
-      });
+      // クリックした地点にマーカーを作成
+      createRouteMarker(e.latLng, map);
     }
 
     if (routePoints.length >= 2) {
@@ -61,6 +55,10 @@ async function initMap() {
 
       routePolyline = getPolylineObject(route.overview_polyline); // ポリラインオブジェクトを作成
       routePolyline.setMap(map); // ルートをマップ上に描写
+
+      // マーカーをルート上に表示
+      clearRouteMarkers(markers);
+      setMarkerOnPolyline(route);
 
       addValueToForm(route, routePoints); // フォームにデータを追加
     }
@@ -129,6 +127,35 @@ function resetPolyline(routePolyline) {
     routePolyline.setMap(null);
     routePolyline = null;
   }
+}
+
+// !コース上にマーカーを作成
+function createRouteMarker(latLng, map) {
+  const routeCreateMarkerView = new advancedMarkerElement({
+    map,
+    position: latLng,
+  });
+  markers.push(routeCreateMarkerView);
+}
+
+// !ルート上のマーカーを削除
+function clearRouteMarkers(markers) {
+  markers.forEach(marker => {
+    marker.setMap(null);
+  })
+  markers.length = 0;
+}
+
+// !ポリライン上にマーカーを設置
+function setMarkerOnPolyline(route) {
+  const legs = route.legs;
+  for (let i = 0; i < legs.length; i++) {
+    const legStartLocation = legs[i].start_location;
+    createRouteMarker(legStartLocation, map);
+  }
+
+  const legEndLocation = legs[legs.length - 1].end_location;
+  createRouteMarker(legEndLocation, map);
 }
 
 // !ルートの総距離を計算
