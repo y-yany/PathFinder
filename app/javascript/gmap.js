@@ -74,9 +74,24 @@ async function initMap() {
     region: "JP",
   };
 
-  // マップ表示範囲を更新
+  // ズームレベル変更時の操作
   map.addListener('bounds_changed', () => {
+    // マップ表示範囲を更新
     autocompleteOptions.locationBias = map.getBounds();
+
+    // マーカーの表示非表示を制御
+    if (!markers) { return; }
+
+    const zoomLevel = map.getZoom();
+    if (zoomLevel < 13.5) {
+      markers.forEach(marker => {
+        marker.setMap(null);
+      })
+    } else {
+      markers.forEach(marker => {
+        marker.setMap(map);
+      })
+    }
   });
 
   // マップ上の検索
