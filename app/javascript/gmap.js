@@ -1,4 +1,5 @@
 let map;
+let markers = [];
 let googleMapId = gon.google_map_id;
 // ライブラリ
 let advancedMarkerElement;
@@ -42,6 +43,9 @@ async function initMap() {
   map.addListener('click', async (e) => {
     if (!e.placeId) {
       routePoints.push(e.latLng);
+
+      // クリックした地点にマーカーを作成
+      createRouteMarker(e.latLng, map);
     }
 
     if (routePoints.length >= 2) {
@@ -51,6 +55,10 @@ async function initMap() {
 
       routePolyline = getPolylineObject(route.overview_polyline); // ポリラインオブジェクトを作成
       routePolyline.setMap(map); // ルートをマップ上に描写
+
+      // マーカーをルート上に表示
+      clearRouteMarkers(markers);
+      setMarkerOnPolyline(route);
 
       addValueToForm(route, routePoints); // フォームにデータを追加
     }
@@ -66,9 +74,24 @@ async function initMap() {
     region: "JP",
   };
 
-  // マップ表示範囲を更新
+  // ズームレベル変更時の操作
   map.addListener('bounds_changed', () => {
+    // マップ表示範囲を更新
     autocompleteOptions.locationBias = map.getBounds();
+
+    // マーカーの表示非表示を制御
+    if (!markers) { return; }
+
+    const zoomLevel = map.getZoom();
+    if (zoomLevel < 13.5) {
+      markers.forEach(marker => {
+        marker.setMap(null);
+      })
+    } else {
+      markers.forEach(marker => {
+        marker.setMap(map);
+      })
+    }
   });
 
   // マップ上の検索
@@ -119,6 +142,35 @@ function resetPolyline(routePolyline) {
     routePolyline.setMap(null);
     routePolyline = null;
   }
+}
+
+// !コース上にマーカーを作成
+function createRouteMarker(latLng, map) {
+  const routeCreateMarkerView = new advancedMarkerElement({
+    map,
+    position: latLng,
+  });
+  markers.push(routeCreateMarkerView);
+}
+
+// !ルート上のマーカーを削除
+function clearRouteMarkers(markers) {
+  markers.forEach(marker => {
+    marker.setMap(null);
+  })
+  markers.length = 0;
+}
+
+// !ポリライン上にマーカーを設置
+function setMarkerOnPolyline(route) {
+  const legs = route.legs;
+  for (let i = 0; i < legs.length; i++) {
+    const legStartLocation = legs[i].start_location;
+    createRouteMarker(legStartLocation, map);
+  }
+
+  const legEndLocation = legs[legs.length - 1].end_location;
+  createRouteMarker(legEndLocation, map);
 }
 
 // !ルートの総距離を計算
