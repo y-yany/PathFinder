@@ -39,7 +39,7 @@ async function initMap() {
   // マップオブジェクトの作成
   map = new Map(document.getElementById("create-map"), mapOptions);
 
-  // ルート作成
+  // マップクリック時の動作
   map.addListener('click', async (e) => {
     if (!e.placeId) {
       routePoints.push(e.latLng);
@@ -48,19 +48,32 @@ async function initMap() {
       createRouteMarker(e.latLng, map);
     }
 
+    // ルート計算
     if (routePoints.length >= 2) {
       resetPolyline(routePolyline); // マップに描写されているポリラインを削除
 
       const route = await calcRoute(routePoints) // ルートを計算
 
-      routePolyline = getPolylineObject(route.overview_polyline); // ポリラインオブジェクトを作成
+      const encodedPolyline = route.overview_polyline;
+      routePolyline = getPolylineObject(encodedPolyline); // ポリラインオブジェクトを作成
       routePolyline.setMap(map); // ルートをマップ上に描写
 
       // マーカーをルート上に表示
       clearRouteMarkers(markers);
       setMarkerOnPolyline(route);
 
-      addValueToForm(route, routePoints); // フォームにデータを追加
+      // ルート情報を表示
+      const totalDistance = calcTotalDistance(route);
+      const distanceField = document.getElementById("route-info-distance");
+      distanceField.innerText = `コース距離：${totalDistance.toFixed(2)} km`;
+
+      const startAddress = route.legs[0].start_address;
+      const startAddressField = document.getElementById("route-info-address");
+      startAddressField.innerText = `地点：${startAddress.split(" ")[1]}`;
+
+      // フォームにデータを追加
+      addValueToForm(totalDistance, startAddress, encodedPolyline, routePoints);
+
     }
   });
 
@@ -185,21 +198,21 @@ function calcTotalDistance(route) {
 }
 
 // !フォームに値を追加
-function addValueToForm(route, routePoints) {
+function addValueToForm(distance, address, polylineData, routePoints) {
   const form = document.getElementById("course-form");
   if (form) {
     form.addEventListener('submit', (e) => {
       // コースの距離
       const distanceField = e.target.querySelector('#course-distance-field');
-      distanceField.value = calcTotalDistance(route);
+      distanceField.value = distance;
   
       // コースの始点の住所
       const addressField = e.target.querySelector('#course-address-field');
-      addressField.value = route.legs[0].start_address;
+      addressField.value = address;
       
       // ポリラインデータ
       const encodedPolylineField = e.target.querySelector('#course-encoded-polyline-field');
-      encodedPolylineField.value = route.overview_polyline;
+      encodedPolylineField.value = polylineData;
   
       // コースを構成する座標データ
       const positionsField = e.target.querySelector('#marker-positions-field');
