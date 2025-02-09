@@ -1,7 +1,6 @@
 import { getPolylineObject } from "./gmap_common";
 
 let show_map;
-let googleMapId = gon.google_map_id;
 let courseEncodedPolyline = gon.course_encoded_polyline;
 let startPosition = gon.start_position;
 
@@ -17,7 +16,7 @@ async function initMap() {
     streetViewControl: false, // ストリートビューのボタン非表示
     mapTypeControl: false, // 地図、航空写真のボタン非表示
     fullscreenControl: false, // フルスクリーンボタン非表示
-    mapId: googleMapId,
+    mapId: "c051c893a57825fa",
   };
 
   // マップオブジェクトの作成
