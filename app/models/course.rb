@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :user
   has_many :markers, dependent: :destroy
+  has_many_attached :main_images
 
   validates :title, presence: true
   validates :body, length: { maximum: 1_000 }
