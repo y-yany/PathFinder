@@ -9,6 +9,7 @@ class CourseMarkerForm
   attribute :distance, :decimal
   attribute :address, :string
   attribute :encoded_polyline, :string
+  attribute :main_images, :array
   attribute :user_id, :integer
   attribute :positions, :array, default: []
 
@@ -16,7 +17,7 @@ class CourseMarkerForm
   validates :user_id, presence: true
 
   def save
-    course = Course.new(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, user_id: user_id)
+    course = Course.new(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, main_images: main_images, user_id: user_id)
     if course.save
       positions.each_with_index do |position, index|
         location = "POINT(#{position['lng']} #{position['lat']})"

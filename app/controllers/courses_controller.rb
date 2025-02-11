@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course_marker_form = CourseMarkerForm.new(course_marker_params)
+    @course_marker_form = CourseMarkerForm.new(course_marker_params)    
     course_id = @course_marker_form.save
     if course_id
       redirect_to course_path(id: course_id), success: "コースを作成しました"
@@ -36,7 +36,7 @@ class CoursesController < ApplicationController
   private
 
   def course_marker_params
-    params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, :positions).merge(user_id: current_user.id)
+    params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, :positions, main_images: []).merge(user_id: current_user.id)
   end
 
   def set_map_id
