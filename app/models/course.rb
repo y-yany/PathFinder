@@ -1,7 +1,9 @@
 class Course < ApplicationRecord
   belongs_to :user
   has_many :markers, dependent: :destroy
-  has_many_attached :main_images
+  has_many_attached :main_images do |attachable|
+    attachable.variant :thumb, resize_to_fill: [300, 200]
+  end
 
   validates :title, presence: true
   validates :body, length: { maximum: 1_000 }
