@@ -2,7 +2,18 @@
   <div class="card card-compact bg-base-100 w-72 shadow-xl my-3">
     <figure>
       <% if course.main_images.attached? %>
-        <%= image_tag course.main_images.first.variant(:thumb).processed, class: "rounded-xl" %>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <% course.main_images.each do |image| %>
+              <div class="swiper-slide"><%= image_tag image.variant(:thumb).processed, class: "rounded-xl" %></div>
+            <% end %>
+          </div>
+          <%# navigation buttons %>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <%# pagination %>
+          <div class="swiper-pagination"></div>
+        </div>
       <% else %>
         <%= image_tag "course_placeholder.png", class: "rounded-xl" %>
       <% end %>
