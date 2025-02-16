@@ -4,6 +4,8 @@
   <div class="grid grid-cols-3 gap-4">  
     <div class="col-span-1">
       <%= form_with model: @course_marker_form, url: courses_path, method: :post, local: true, id: "course-form" do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
         <div class="mb-3">
           <%= f.label :title, class: "label" %>
           <%= f.text_field :title, autofocus: true, class: "input input-bordered" %>
