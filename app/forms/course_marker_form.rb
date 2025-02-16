@@ -14,16 +14,20 @@ class CourseMarkerForm
   attribute :positions, :array, default: []
 
   # バリデーション
+  validates :title, presence: true
+  validates :encoded_polyline, presence: {message: "を作成してください" }
   validates :user_id, presence: true
 
   def save
+    false unless valid?
+
     course = Course.new(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, main_images: main_images, user_id: user_id)
     if course.save
       positions.each_with_index do |position, index|
         location = "POINT(#{position['lng']} #{position['lat']})"
         Marker.create(location: location, order: index, course_id: course.id)
       end
-      course.id
+      course      
     else
       false
     end
