@@ -1,16 +1,14 @@
 <header>
   <div class="navbar bg-base-100 border-b-2 border-neutral">
-    <div class="flex-1 px-2 lg:flex-none">
+    <div class="flex-1 px-2">
       <%= link_to '/', class: "text-lg font-bold" do %>
         LOGO
       <% end %>
     </div>
-    <div class="flex flex-1 justify-end px-2">
-      <div class="flex items-stretch">
-        <%= link_to t('header.course_index'), courses_path, class: "btn btn-ghost"%>
-        <%= link_to t('header.sign_up'), new_user_registration_path, class: "btn btn-ghost"%>
-        <%= link_to t('header.sign_in'), new_user_session_path, class: "btn btn-ghost"%>
-      </div>
+    <div class="flex-none px-2">
+      <%= link_to t('header.course_index'), courses_path, class: "btn btn-ghost"%>
+      <%= link_to t('header.sign_up'), new_user_registration_path, class: "btn btn-ghost"%>
+      <%= link_to t('header.sign_in'), new_user_session_path, class: "btn btn-ghost"%>
     </div>
   </div>
 </header>

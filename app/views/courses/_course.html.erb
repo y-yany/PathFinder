@@ -1,11 +1,11 @@
 <div id="course-id-<%= course.id %>">
-  <div class="card card-compact bg-base-100 w-72 shadow-xl my-3">
+  <div class="card card-compact bg-base-100 w-full sm:w-96 shadow-xl my-3">
     <figure>
       <% if course.main_images.attached? %>
-        <div class="swiper">
+        <div class="swiper w-full">
           <div class="swiper-wrapper">
             <% course.main_images.each do |image| %>
-              <div class="swiper-slide"><%= image_tag image.variant(:thumb).processed, class: "rounded-xl" %></div>
+              <div class="swiper-slide"><%= image_tag image.variant(:thumb).processed, class: "w-full rounded-xl" %></div>
             <% end %>
           </div>
           <%# navigation buttons %>
@@ -15,7 +15,7 @@
           <div class="swiper-pagination"></div>
         </div>
       <% else %>
-        <%= image_tag "course_placeholder.png", class: "rounded-xl" %>
+        <%= image_tag "course_placeholder.png", class: "w-full rounded-xl" %>
       <% end %>
     </figure>
     <div class="card-body">
