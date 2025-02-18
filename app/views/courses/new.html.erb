@@ -1,9 +1,28 @@
-<div class="container mx-auto pt-4">
+<div class="container mx-auto pt-4 px-4">
   <h1><%= t('.title') %></h1>
 
-  <div class="grid grid-cols-3 gap-4">  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">  
+    <div class="col-span-2 relative">
+      <div class="flex gap-4">
+        <div id="route-info-distance"></div>
+        <div id="route-info-address"></div>
+      </div>
+      <%# マップ検索フォーム %>
+      <div class="absolute top-8 left-4 z-10 bg-white p-4 rounded-lg shadow-lg">
+          <input id="search-input" type="text" placeholder="検索ワードを入力" class="input input-bordered w-full max-w-xs" />
+          <ul id="suggested-locations" class="menu bg-base-200 rounded-box w-72"></ul>
+      </div>
+
+      <%# マップ %>
+      <div class="h-screen">
+        <div id="create-map" class="w-full" style="height: 75%;"></div>
+      </div>
+    </div>
+
     <div class="col-span-1">
       <%= form_with model: @course_marker_form, url: courses_path, method: :post, local: true, id: "course-form" do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
         <div class="mb-3">
           <%= f.label :title, class: "label" %>
           <%= f.text_field :title, autofocus: true, class: "input input-bordered" %>
@@ -26,23 +45,6 @@
 
         <%= f.submit t('.create'), class: "btn btn-accent" %>
       <% end %>
-    </div>
-
-    <div class="col-span-2 relative">
-      <div class="flex gap-4">
-        <div id="route-info-distance"></div>
-        <div id="route-info-address"></div>
-      </div>
-      <%# マップ検索フォーム %>
-      <div class="absolute top-8 left-4 z-10 bg-white p-4 rounded-lg shadow-lg">
-          <input id="search-input" type="text" placeholder="検索ワードを入力" class="input input-bordered w-full max-w-xs" />
-          <ul id="suggested-locations" class="menu bg-base-200 rounded-box w-72"></ul>
-      </div>
-
-      <%# マップ %>
-      <div class="h-screen">
-        <div id="create-map" style="width: 100%; height: 80%;"></div>
-      </div>
     </div>
   </div>
 </div>

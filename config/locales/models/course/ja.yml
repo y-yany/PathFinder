@@ -6,3 +6,5 @@ ja:
         body: 内容
         distance: 距離
         address: 場所
+        encoded_polyline: ルート
+        main_images: 写真
