@@ -15,11 +15,11 @@ class CourseMarkerForm
 
   # バリデーション
   validates :title, presence: true
-  validates :encoded_polyline, presence: {message: "を作成してください" }
+  validates :encoded_polyline, presence: { message: "を作成してください" }
   validates :user_id, presence: true
 
   def save
-    false unless valid?
+    return false unless valid?
 
     course = Course.new(title: title, body: body, distance: distance, address: address, encoded_polyline: encoded_polyline, main_images: main_images, user_id: user_id)
     if course.save
@@ -27,7 +27,7 @@ class CourseMarkerForm
         location = "POINT(#{position['lng']} #{position['lat']})"
         Marker.create(location: location, order: index, course_id: course.id)
       end
-      course      
+      course
     else
       false
     end
