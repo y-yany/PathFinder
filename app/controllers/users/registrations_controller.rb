@@ -40,6 +40,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def build_resource(hash = {})
+    # ユーザーオブジェクト作成時、uidに一意な値を設定
+    hash[:uid] = SecureRandom.uuid
+    super
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
