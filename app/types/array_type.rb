@@ -9,7 +9,7 @@ class ArrayType < ActiveModel::Type::Value
         []
       end
     elsif value.is_a?(Array)
-      value
+      value.reject { |item| item == "" }
     end
   end
 end
