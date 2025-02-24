@@ -14,23 +14,19 @@ class User < ApplicationRecord
     id == object&.user_id
   end
 
-  # 
+  # Google認証したユーザーを取得 or 作成
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
-  
-    unless user
-        user = User.create(
-          name: auth.info.name,
-          uid: auth.uid,
-          provider: auth.provider,
-          email: User.dummy_email(auth),
-          password: Devise.friendly_token[0,20]
-        )
-    end
+
+    user ||= User.create(
+      name: auth.info.name,
+      uid: auth.uid,
+      provider: auth.provider,
+      email: User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20]
+    )
     user
   end
-
-  private
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
