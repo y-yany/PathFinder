@@ -1,7 +1,12 @@
 <div class="container mx-auto pt-4 px-4">
   <h1><%= t('.title') %></h1>
 
-  <div class="grid grid-cols-1 gap-4 mt-4">
+  <div class="flex justify-center">
+    <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(course_url(@course))}&hashtags=お散歩マップ,散歩", target: "_blank", title: "Xでシェア" do %>
+      <%= image_tag "x_twitter_mark.svg", class: "h-5 w-5" %>
+    <% end %>
+  </div>
+  <div class="grid grid-cols-1 gap-4">
     <div>
       <h2><%= @course.title %></h2>
       <p>ユーザー名：<%= @course.user.name %></p>
