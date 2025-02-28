@@ -23,4 +23,20 @@ module ApplicationHelper
       }
     }
   end
+
+  def assign_meta_tags(options = {})
+    meta_tags =
+      {
+        og: {
+          title: options[:title].presence || default_meta_tags[:title],
+          description: options[:description].presence || default_meta_tags[:description],
+          image: options[:image].presence
+        },
+        twitter: {
+          image: options[:image].presence
+        }
+      }
+
+    set_meta_tags(meta_tags)
+  end
 end

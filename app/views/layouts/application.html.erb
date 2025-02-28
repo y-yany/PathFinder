@@ -7,6 +7,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- meta_tags -->
+    <%= display_meta_tags(default_meta_tags) %>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -19,9 +22,6 @@
         v: "weekly"        
       });
     </script>
-
-    <!-- meta_tags -->
-    <%= display_meta_tags(default_meta_tags) %>
   </head>
 
   <body>
