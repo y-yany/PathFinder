@@ -64,6 +64,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "myapp_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: "path-finder-43182-883c012d073e.herokuapp.com" }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -18,7 +18,7 @@ module ApplicationHelper
         local: "ja-JP" # 言語と地域
       },
       twitter: {
-        card: "summary_large_image",
+        card: "summary",
         # image: image_url('default_share.png')
       }
     }
