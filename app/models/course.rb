@@ -3,6 +3,7 @@ class Course < ApplicationRecord
   has_many :markers, dependent: :destroy
   has_many_attached :main_images do |attachable|
     attachable.variant :thumb, resize_to_fill: [300, 200]
+    attachable.variant :twitter_card, resize_to_limit: [800, 800]
   end
 
   validates :title, presence: true

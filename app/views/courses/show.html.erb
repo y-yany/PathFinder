@@ -1,4 +1,4 @@
-<% assign_meta_tags title: @course.title, description: @course.body, image: url_for(@course.main_images[0]) %>
+<% assign_meta_tags title: @course.title, description: @course.body, image: rails_blob_url(@course.main_images[0].variant(:twitter_card).processed) %>
 
 <div class="container mx-auto pt-4 px-4">
   <h1><%= t('.title') %></h1>
