@@ -15,12 +15,12 @@ module ApplicationHelper
         description: "散歩コース共有を目的としたアプリです",
         type: "website", # ページの種類
         url: request.original_url,
-        image: image_url('default_share.png'),
+        image: image_url("default_share.png"),
         local: "ja-JP" # 言語と地域
       },
       twitter: {
         card: "summary",
-        image: image_url('default_share.png')
+        image: image_url("default_share.png")
       }
     }
   end
