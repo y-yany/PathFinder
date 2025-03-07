@@ -8,14 +8,14 @@
         <%= f.search_field :course_query, class: "input input-bordered w-full", placeholder: "検索ワードを入力して下さい" %>
         <%= f.submit t('.search'), class: "btn btn-accent" %>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" data-controller="courses">
         <details class="dropdown dropdown-bottom">
-          <summary class="badge badge-lg">距離</summary>
+          <summary class="badge badge-lg" data-courses-target="distance">距離</summary>
           <div class="dropdown-content card card-sm bg-base-100 rounded-box z-10 max-w-xs shadow-md">
             <div class="card-body flex flex-row items-center">
-              <%= f.number_field :distance, min: 0, max: 49, placeholder: "0", class: "input input-bordered" %> km
+              <%= f.number_field :min_distance, min: 0, max: 50, placeholder: "0", class: "input input-bordered", data: { courses_target: "min_distance", action: "input->courses#setDistanceRange" } %> km
               <span>~</span>
-              <%= f.number_field :distance, min: 1, max: 50, placeholder: "50", class: "input input-bordered" %> km
+              <%= f.number_field :max_distance, min: 1, max: 50, placeholder: "50", class: "input input-bordered", data: { courses_target: "max_distance", action: "input->courses#setDistanceRange" } %> km
             </div>
           </div>
         </details>
