@@ -16,5 +16,6 @@ class Course < ApplicationRecord
   scope :title_contain, ->(word) { where('title LIKE ?', "%#{word}%") }
   scope :body_contain, ->(word) { where('body LIKE ?', "%#{word}%") }
   scope :address_contain, ->(word) { where('address LIKE ?', "%#{word}%") }
-  scope :distance_within_limit, ->(distance) { where('distance <= ?', distance) }
+  scope :distance_greater_than, ->(distance) { where('distance >= ?', distance) }
+  scope :distance_less_than, ->(distance) { where('distance <= ?', distance) }
 end

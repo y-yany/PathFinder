@@ -1,9 +1,11 @@
 class SearchCoursesForm
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::Validations
 
   attribute :course_query, :string
-  attribute :distance, :integer
+  attribute :min_distance, :integer
+  attribute :max_distance, :integer
 
   def search
     relation = Course.distinct
@@ -14,7 +16,9 @@ class SearchCoursesForm
       relation = relation.address_contain(word)
     end
 
-    relation = relation.distance_within_limit(distance) if distance.present?
+    relation = relation.distance_greater_than(min_distance) if min_distance.present?
+
+    relation = relation.distance_less_than(max_distance) if max_distance.present?
 
     relation
   end
