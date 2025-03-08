@@ -3,7 +3,8 @@ class CoursesController < ApplicationController
   before_action :set_map_id, only: %i[new show]
 
   def index
-    @courses = Course.includes(:user)
+    @q = SearchCoursesForm.new(search_params)
+    @courses = @q.search.includes(:user)
   end
 
   def new
@@ -48,5 +49,9 @@ class CoursesController < ApplicationController
       lat: course.markers[0].location.latitude,
       lng: course.markers[0].location.longitude
     }
+  end
+
+  def search_params
+    params[:q]&.permit(:course_query, :min_distance, :max_distance)
   end
 end

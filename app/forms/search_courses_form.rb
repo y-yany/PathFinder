@@ -11,9 +11,7 @@ class SearchCoursesForm
     relation = Course.distinct
 
     course_query_words.each do |word|
-      relation = relation.title_contain(word)
-      relation = relation.body_contain(word)
-      relation = relation.address_contain(word)
+      relation = relation.title_body_address_contain(word)
     end
 
     relation = relation.distance_greater_than(min_distance) if min_distance.present?
