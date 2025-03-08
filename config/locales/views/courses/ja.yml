@@ -2,6 +2,7 @@ ja:
   courses:
     index:
       title: コース一覧
+      search: 検索
     new:
       title: コース作成
       create: 作成
