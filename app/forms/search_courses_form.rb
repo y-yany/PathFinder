@@ -8,7 +8,7 @@ class SearchCoursesForm
 
   validates_with DistanceValidator
 
-  def search    
+  def search
     relation = Course.distinct
 
     return relation unless valid?
