@@ -1,14 +1,17 @@
 class SearchCoursesForm
   include ActiveModel::Model
   include ActiveModel::Attributes
-  include ActiveModel::Validations
 
   attribute :course_query, :string
   attribute :min_distance, :integer
   attribute :max_distance, :integer
 
-  def search
+  validates_with DistanceValidator
+
+  def search    
     relation = Course.distinct
+
+    return relation unless valid?
 
     course_query_words.each do |word|
       relation = relation.title_body_address_contain(word)
