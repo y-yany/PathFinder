@@ -1,0 +1,22 @@
+<%= form_with model: q, scope: :q, url: url, method: :get do |f| %>
+  <div class="mb-3 flex">
+    <%= f.search_field :course_query, class: "input input-bordered w-full", placeholder: "検索ワードを入力して下さい" %>
+    <%= f.submit t('courses.index.search'), class: "btn btn-accent" %>
+  </div>
+  <div class="mb-3" data-controller="courses">
+    <details class="dropdown dropdown-bottom">
+      <% if q.min_distance || q.max_distance %>
+        <summary class="badge badge-lg shadow-md" data-courses-target="distance"><%= "#{q.min_distance} - #{q.max_distance} km" %></summary>
+      <% else %>
+        <summary class="badge badge-lg shadow-md" data-courses-target="distance">距離</summary>
+      <% end %>
+      <div class="dropdown-content card card-sm bg-base-100 rounded-box z-10 max-w-xs shadow-md">
+        <div class="card-body flex flex-row items-center">
+          <%= f.number_field :min_distance, min: 0, max: 50, placeholder: "0", class: "input input-bordered", data: { courses_target: "min_distance", action: "input->courses#setDistanceRange" } %> km
+          <span>~</span>
+          <%= f.number_field :max_distance, min: 1, max: 50, placeholder: "50", class: "input input-bordered", data: { courses_target: "max_distance", action: "input->courses#setDistanceRange" } %> km
+        </div>
+      </div>
+    </details>
+  </div>
+<% end %>
