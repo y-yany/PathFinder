@@ -1,8 +1,16 @@
 <%= form_with model: q, scope: :q, url: url, method: :get do |f| %>
-  <div class="mb-3 flex">
-    <%= f.search_field :course_query, class: "input input-bordered w-full", placeholder: "検索ワードを入力して下さい" %>
+  <div class="flex space-x-1">
+    <!-- 入力欄 -->
+    <div class="mb-3 w-full relative" data-controller="autocomplete" data-autocomplete-url-value="/courses/search" role="combobox">
+      <%= f.search_field :course_query, class: "input input-bordered w-full", placeholder: "検索ワードを入力して下さい", data: { autocomplete_target: "input" } %>
+      <!-- オートコンプリートの出力部分 -->
+      <ul class="list-group absolute w-full bg-base-100 border border-gray-300 rounded-lg max-h-60 overflow-auto z-20" data-autocomplete-target="results"></ul>
+    </div>
+    <!-- 検索ボタン -->
     <%= f.submit t('courses.index.search'), class: "btn btn-accent" %>
   </div>
+
+  <!-- 距離範囲選択 -->
   <div class="mb-3" data-controller="courses">
     <details class="dropdown dropdown-bottom">
       <% if q.min_distance || q.max_distance %>
