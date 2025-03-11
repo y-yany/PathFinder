@@ -1,0 +1,10 @@
+<% @title_match_courses.each do |course| %>
+  <li class="list-group-item py-2 px-4 text-sm hover:bg-gray-200 rounded-md" role="option" data-autocomplete-value="<%= course.title %>">
+    <%= course.title %>
+  </li>
+<% end %>
+<% @address_match_courses.each do |course| %>
+  <li class="list-group-item py-2 px-4 text-sm hover:bg-gray-200 rounded-md" role="option" data-autocomplete-value="<%= course.address.split[1] %>">
+    <%= course.address.split[1] %>
+  </li>
+<% end %>

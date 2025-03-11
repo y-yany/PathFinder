@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     post 'signup', to: 'users/registrations#create', as: :user_registration
   end
 
-  resources :courses, only: %i[index new create show destroy]
+  resources :courses, only: %i[index new create show destroy] do
+    get 'search', on: :collection
+  end
 
   root "home#index"
 end

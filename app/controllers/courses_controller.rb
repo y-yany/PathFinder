@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index show search]
   before_action :set_map_id, only: %i[new show]
 
   def index
@@ -31,6 +31,14 @@ class CoursesController < ApplicationController
     @course = current_user.courses.find(params[:id])
     @course.destroy!
     redirect_to courses_path, success: "コースを削除しました", status: :see_other
+  end
+
+  def search
+    @title_match_courses = Course.where("title LIKE ?", "%#{params[:q]}%")
+    @address_match_courses = Course.where("address LIKE ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
