@@ -64,7 +64,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "myapp_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: "path-finder-43182-883c012d073e.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "www.xn--t8jvn5b0a8338dmth.com" }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -92,4 +92,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Set custom domain
+  config.hosts << "www.xn--t8jvn5b0a8338dmth.com"
 end
