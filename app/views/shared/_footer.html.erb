@@ -1,5 +1,30 @@
-<footer class="footer footer-center p-10 bg-base-100 text-neutral">
-	<aside>
-		<p>Copyright © 2025</p>
-	</aside>
+<footer class="navbar flex justify-between w-ful bg-gray-100 text-neutral">
+
+  <!-- コース一覧 -->
+  <%= link_to courses_path, class: "flex flex-col flex-1" do %>
+    <span class="material-icons" title=<%= t('footer.course_index') %>>map</span>
+  <% end %>
+
+  <!-- コース作成 -->
+  <%= link_to new_course_path, class: "flex flex-col flex-1" do %>
+    <span class="material-icons" title=<%= t('footer.course_create') %>>add_box</span>
+  <% end %>
+
+  <!-- ナビゲーション -->
+  <div class="drawer drawer-end flex flex-col flex-1">
+    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+    <!-- Page content -->
+      <label for="my-drawer-4" class="drawer-button btn btn-ghost">
+        <span class="material-icons">menu</span>
+      </label>
+    </div>
+    <div class="drawer-side">
+      <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu bg-gray-100 bg-opacity-90 text-base-content min-h-full w-50 md:w-80 p-4">
+        <!-- Sidebar content -->
+        <%= render 'shared/footer_link_list' %>
+      </ul>
+    </div>
+  </div>
 </footer>
