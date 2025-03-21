@@ -1,0 +1,52 @@
+<!-- 新規登録 -->
+<li>
+  <%= link_to new_user_registration_path do %>
+    <span class="material-icons">how_to_reg</span>
+    <%= t('footer.sign_up') %>
+  <% end %>
+</li>
+
+<!-- ログイン -->
+<li>
+  <%= link_to new_user_session_path do %>
+    <span class="material-icons">login</span>
+    <%= t('footer.sign_in') %>
+  <% end %>
+</li>
+
+<div class="divider divider-neutral opacity-40 p-2"></div>
+
+<!-- お問い合わせ -->
+<li>
+  <%= link_to "https://forms.gle/TCtXKcy1x6c36Lvo8", target: "_blank" do %>
+    <span class="material-icons">contact_page</span>
+    <%= t('footer.terms_of_use') %>
+  <% end %>
+</li>
+
+<!-- 利用規約 -->
+<li>
+  <%= link_to "#" do %>
+    <span class="material-icons">description</span>
+    <%= t('footer.terms_of_service') %>
+  <% end %>
+</li>
+
+<!-- プライバシーポリシー -->
+<li>
+  <%= link_to "#" do %>
+    <span class="material-icons">verified_user</span>
+    <%= t('footer.privacy_policy') %>
+  <% end %>
+</li>
+
+<div class="divider divider-neutral opacity-40 p-2"></div>
+
+<div class="flex flex-col items-center">
+  <div class="text-xs my-2">Copyright © 2025</div>
+
+  <!-- Github -->
+  <%= link_to "https://github.com/y-yany/PathFinder", target: "_blank" do %>
+    <%= image_tag "github_mark.svg", class: "h-6" %>
+  <% end %>
+</div>
