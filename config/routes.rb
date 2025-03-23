@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
 
+  # プライバシーポリシー
+  get 'privacy_policy', to: 'home#privacy_policy'
+
+  # トップページ
   root "home#index"
 end
