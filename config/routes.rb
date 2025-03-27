@@ -9,12 +9,16 @@ Rails.application.routes.draw do
     post 'signup', to: 'users/registrations#create', as: :user_registration
   end
 
+  # コース
   resources :courses, only: %i[index new create show destroy] do
     get 'search', on: :collection
   end
 
   # プライバシーポリシー
   get 'privacy_policy', to: 'home#privacy_policy'
+
+  # 利用規約
+  get 'terms_of_use', to: 'home#terms_of_use'
 
   # トップページ
   root "home#index"
