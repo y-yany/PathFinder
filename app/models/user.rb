@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                   :bigint           not null, primary key
+#  name                 :string(255)      not null
+#  email                :string(255)      not null, default("")
+#  encrypted_password   :string(255)      not null, default("")
+#  provider             :string(255)
+#  uid                  :string(255)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email                   (email)
+#  index_users_on_uid_and_provider        (uid, provider)
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
