@@ -5,5 +5,11 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     uid { SecureRandom.uuid }
+
+    trait :invalid do
+      name { nil }
+      email { nil }
+      password { nil }
+    end
   end
 end
