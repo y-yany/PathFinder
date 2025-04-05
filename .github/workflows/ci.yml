@@ -22,11 +22,7 @@ jobs:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
-        healthcheck:
-          test: ["CMD-SHELL", "pg_isready -d rails_test -U rails"]
-          interval: 10s
-          timeout: 5s
-          retries: 5
+        options: --health-cmd "pg_isready -d rails_test -U rails" --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       RAILS_ENV: test
     steps:
