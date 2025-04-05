@@ -2,7 +2,7 @@ test:
   adapter: postgis
   encoding: unicode
   pool: 5
-  host: localhost
+  host: postgres
   port: 5432
   database: rails_test
   username: rails
