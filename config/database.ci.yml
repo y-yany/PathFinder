@@ -3,7 +3,6 @@ test:
   encoding: unicode
   pool: 5
   host: postgres
-  port: 5432
   database: rails_test
   username: rails
   password: password
