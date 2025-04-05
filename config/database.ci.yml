@@ -3,6 +3,7 @@ test:
   encoding: unicode
   pool: 5
   host: localhost
+  port: 5432
   database: rails_test
   username: rails
   password: password
