@@ -22,7 +22,6 @@ jobs:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
-        options: --health-cmd "pg_isready -d rails_test -U rails" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,6 +35,7 @@ jobs:
       - name: Set up database
         run: |
             cp config/database.ci.yml config/database.yml
+            bundle exec rails db:drop RAILS_ENV=test
             bundle exec rails db:create RAILS_ENV=test
             bundle exec rails db:migrate RAILS_ENV=test
       # Add or replace test runners here
