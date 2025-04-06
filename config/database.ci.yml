@@ -1,0 +1,8 @@
+test:
+  adapter: postgis
+  encoding: unicode
+  pool: 5
+  host: localhost
+  database: rails_test
+  username: rails
+  password: password
