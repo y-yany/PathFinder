@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 
   def index
     @q = SearchCoursesForm.new(search_params)
-    @courses = @q.search.includes(:user)
+    @courses = @q.search.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new
