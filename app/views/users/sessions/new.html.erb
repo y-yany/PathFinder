@@ -1,23 +1,30 @@
 <div class="container mx-auto">
-  <div class="grid grid-cols-1 gap-2 place-items-center">
-    <h2><%= t('.title') %></h2>
+  <div class="flex flex-col items-center">
+    <h1 class="mt-8 text-xl"><%= t('.title') %></h1>
 
-    <%= form_with model: resource, url: session_path(resource_name) do |f| %>
-      <div class="mb-3">
-        <%= f.label :email, class: "label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered" %>
-      </div>
-    
-      <div class="mb-3">
-        <%= f.label :password, class: "label" %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered" %>
-      </div>
+    <div class="card w-5/6 max-w-sm shadow-2xl rounded-lg">
+      <div class="card-body">
 
-      <div class="flex justify-center">
-        <%= f.submit t('.sign_in'), class: "btn btn-accent" %>
-      </div>
-    <% end %>
+        <%# ログインフォーム %>
+        <%= form_with model: resource, url: session_path(resource_name) do |f| %>
+          <div class="mb-3">
+            <%= f.label :email, class: "label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered rounded-lg w-full" %>
+          </div>
 
-    <%= render "users/shared/links" %>
+          <div class="mb-3">
+            <%= f.label :password, class: "label" %>
+            <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered rounded-lg w-full" %>
+          </div>
+
+          <%= f.submit t('.sign_in'), class: "btn w-full" %>
+        <% end %>
+
+        <%# 新規登録およびgoogle認証へのリンク %>
+        <div class="mt-3 text-center">
+          <%= render "users/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
