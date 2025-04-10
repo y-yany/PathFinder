@@ -1,5 +1,5 @@
 <header>
-  <div class="navbar bg-gray-100 shadow-lg">
+  <div class="navbar bg-gray-100 shadow-md">
     <div class="flex-1 px-2">
       <%= link_to '/', class: "text-lg font-bold" do %>
         LOGO
@@ -7,7 +7,9 @@
     </div>
     <div class="flex-none px-2">
       <%# ログイン済みユーザー向け %>
-      <%= link_to t('header.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost"%>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost", title: t('header.sign_out') do %>
+        <span class="material-icons">logout</span>
+      <% end %>
     </div>
   </div>
 </header>
