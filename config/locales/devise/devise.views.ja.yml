@@ -2,7 +2,7 @@ ja:
   activerecord:
     attributes:
       user:
-        name: ユーザー名
+        name: ユーザーネーム
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻
@@ -10,7 +10,7 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        email: メールアドレス
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -124,9 +124,9 @@ ja:
         didn_t_receive_confirmation_instructions: アカウント確認のメールを受け取っていませんか？
         didn_t_receive_unlock_instructions: アカウントのロック解除方法のメールを受け取っていませんか？
         forgot_your_password: パスワードを忘れましたか？
-        sign_in: ログイン
+        sign_in: ログインはこちら
         sign_in_with_provider: "%{provider}でログイン"
-        sign_up: アカウント登録
+        sign_up: 新規登録はこちら
       minimum_password_length: "（%{count}字以上）"
     unlocks:
       new:
