@@ -1,18 +1,28 @@
-<!-- 新規登録 -->
-<li>
-  <%= link_to new_user_registration_path do %>
-    <span class="material-icons">how_to_reg</span>
-    <%= t('footer.sign_up') %>
-  <% end %>
-</li>
+<% unless user_signed_in? %>
+  <!-- 新規登録 -->
+  <li>
+    <%= link_to new_user_registration_path do %>
+      <span class="material-icons">how_to_reg</span>
+      <%= t('footer.sign_up') %>
+    <% end %>
+  </li>
 
-<!-- ログイン -->
-<li>
-  <%= link_to new_user_session_path do %>
-    <span class="material-icons">login</span>
-    <%= t('footer.sign_in') %>
-  <% end %>
-</li>
+  <!-- ログイン -->
+  <li>
+    <%= link_to new_user_session_path do %>
+      <span class="material-icons">login</span>
+      <%= t('footer.sign_in') %>
+    <% end %>
+  </li>
+<% else %>
+  <!-- ログアウト -->
+  <li>
+    <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+      <span class="material-icons">logout</span>
+      <%= t('footer.sign_out') %>
+    <% end %>
+  </li>
+<% end %>
 
 <div class="divider divider-neutral opacity-40 p-2"></div>
 
