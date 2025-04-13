@@ -6,6 +6,8 @@ ja:
     new:
       title: コース作成
       create: 作成
+      course_title: タイトル
+      body: コース内容 (オプション)
     show:
       title: コース詳細
       to_course_index: コース一覧へ
