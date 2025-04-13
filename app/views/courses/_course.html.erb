@@ -39,24 +39,21 @@
     </div>
 
     <%# コースの写真 %>
-    <figure>
+    <div class="w-full sm:w-1/3">
       <% if course.main_images.attached? %>
-        <div class="swiper w-full">
+        <div class="swiper">
           <div class="swiper-wrapper">
             <% course.main_images.each do |image| %>
               <div class="swiper-slide"><%= image_tag image.variant(:thumb).processed, class: "w-full rounded-xl" %></div>
             <% end %>
           </div>
-          <%# navigation buttons %>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
           <%# pagination %>
           <div class="swiper-pagination"></div>
         </div>
       <% else %>
         <%= image_tag "course_placeholder.png", class: "w-full rounded-xl" %>
       <% end %>
-    </figure>
+    </div>
 
     <%# スマホ画面向け %>
     <div class="card-body w-full shadow-lg rounded-lg sm:hidden">
