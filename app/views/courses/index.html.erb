@@ -1,13 +1,13 @@
-<div class="container mx-auto pt-4 px-4">
-  <h1><%= t('.title') %></h1>
+<div class="container mx-auto w-5/6 md:max-w-4xl">
+  <h1 class="text-2xl mt-8"><%= t('.title') %></h1>
 
   <!-- 検索フォーム -->
-  <div class="mx-auto w-full max-w-md md:max-w-xl py-4">
+  <div class="mx-auto w-full mt-4">
     <%= render 'search_form', q: @q, url: courses_path %>
   </div>
 
   <!-- コース一覧 -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="flex flex-col">
     <% if @courses.present? %>
       <%= render @courses %>
     <% else %>
