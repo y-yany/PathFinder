@@ -1,0 +1,35 @@
+<%= form_with model: model, url: courses_path, method: :post, local: true, id: "course-form" do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <div id="route-info" class="hidden sm:flex sm:flex-col">
+    <div class="badge badge-lg bg-slate-200 rounded-md gap-1 mb-4">
+      <span class="material-icons text-sm h-5">route</span>
+      <span id="route-info-distance" class="text-xs">- km</span>
+    </div>
+    <div class="badge badge-lg bg-slate-200 rounded-md mb-4">
+      <span class="material-icons text-sm h-5">location_on</span>
+      <span id="route-info-address" class="text-xs">-</span>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <%= f.text_field :title, placeholder: t('courses.new.course_title'), class: "input rounded-lg bg-slate-100 w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.text_area :body, placeholder: t('courses.new.body'), class: "textarea rounded-lg bg-slate-100 w-full", rows: 5 %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.file_field :main_images, multiple: true, class: "file-input file-input-secondary rounded-lg text-xs bg-slate-100 w-full" %>
+  </div>
+
+  <%= f.hidden_field :distance, id: "course-distance-field" %> <%# 距離を送信するためのフィールド %>
+  <%= f.hidden_field :address, id: "course-address-field" %> <%# コースの始点を送信するためのフィールド %>
+  <%= f.hidden_field :encoded_polyline, id: "course-encoded-polyline-field" %> <%# ポリラインデータを送信するためのフィールド %>
+  <%= f.hidden_field :positions, id: "marker-positions-field" %> <%# コースのマーカーの位置情報を送信するためのフィールド %>
+
+  <div class="flex justify-end">
+    <%= f.submit t('courses.new.create'), class: "btn btn-primary rounded-lg text-white" %>
+  </div>
+<% end %>

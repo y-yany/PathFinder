@@ -28,7 +28,7 @@ async function initMap() {
   const defaultLocation = { lat: 35.6809591, lng: 139.7673068 };
   const mapOptions = {
     center: { lat: defaultLocation.lat, lng: defaultLocation.lng },
-    zoom: 15,
+    zoom: 16,
     streetViewControl: false, // ストリートビューのボタン非表示
     mapTypeControl: false, // 地図、航空写真のボタン非表示
     fullscreenControl: false, // フルスクリーンボタン非表示
@@ -64,15 +64,14 @@ async function initMap() {
       // ルート情報を表示
       const totalDistance = calcTotalDistance(route);
       const distanceField = document.getElementById("route-info-distance");
-      distanceField.innerText = `コース距離：${totalDistance.toFixed(2)} km`;
+      distanceField.innerText = `${totalDistance.toFixed(2)} km`;
 
       const startAddress = route.legs[0].start_address;
       const startAddressField = document.getElementById("route-info-address");
-      startAddressField.innerText = `地点：${startAddress.split(" ")[1]}`;
+      startAddressField.innerText = `${startAddress.split(" ")[1]}`;
 
       // フォームにデータを追加
       addValueToForm(totalDistance, startAddress, encodedPolyline, routePoints);
-
     }
   });
 
