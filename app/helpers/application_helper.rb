@@ -41,4 +41,14 @@ module ApplicationHelper
 
     set_meta_tags(meta_tags)
   end
+
+  # フラッシュメッセージのスタイル
+  def flash_style(type)
+    case type
+    when "notice", "success"
+      "bg-success/80 text-white"
+    when "error", "alert"
+      "bg-error/80 text-white"
+    end
+  end
 end
