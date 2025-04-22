@@ -2,12 +2,14 @@
 
   <!-- コース一覧 -->
   <%= link_to courses_path, class: "flex flex-col flex-1" do %>
-    <span class="material-icons" title=<%= t('footer.course_index') %>>map</span>
+    <span class="material-icons">map</span>
+    <span class="text-[8px] sm:text-[10px]"><%= t('footer.course_index') %></span>
   <% end %>
 
   <!-- コース作成 -->
   <%= link_to new_course_path, class: "flex flex-col flex-1" do %>
-    <span class="material-icons" title=<%= t('footer.course_create') %>>add_box</span>
+    <span class="material-icons">add_box</span>
+    <span class="text-[8px] sm:text-[10px]"><%= t('footer.course_create') %></span>
   <% end %>
 
   <!-- ナビゲーション -->

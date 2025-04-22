@@ -1,5 +1,9 @@
-<% flash.each do |type, message| %>
-<div class="bg-stone-100 border-l-4 border-stone-500 text-stone-700 p-4">
-	<%= message %>
-</div>
+<% if flash.any? %>
+	<div class="container mx-auto w-5/6">
+		<% flash.each do |type, message| %>
+			<div class="<%= flash_style(type) %> p-4 mt-4 rounded-md shadow-md">
+				<span><%= message %></span>
+			</div>
+		<% end %>
+		</div>
 <% end %>

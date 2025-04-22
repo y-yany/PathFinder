@@ -1,0 +1,19 @@
+ja:
+  home:
+    index:
+      title: お散歩マップ
+      subtitle: みんなの散歩コースを発見シェアしよう！
+      search: コースを探す
+      login: ログインする
+      use_app: お散歩マップの使い方
+      can_scroll: スクロールできます→
+      search_course:
+        title: コース検索
+        description: 地名やキーワードでコース一覧から簡単に検索ができます。<br>距離や時間でコースを絞り込むこともできます。
+      show_course:
+        title: コース詳細
+        description: 投稿されたコースの写真やマップで詳細情報をチェックすることができます。<br>また、投稿はXでシェアすることもできます。
+      more_sign_up: ユーザー登録することで...
+      create_course:
+        title: コース作成
+        description: マップ上をクリックしていくことでコースを作成することがでます。<br>また、コースのタイトル、コメント、写真を追加することができます。
