@@ -3,10 +3,10 @@
   image: @course.main_images.present? ? url_for(@course.main_images[0].variant(:twitter_card).processed) : nil %>
 
 <div class="container mx-auto w-5/6 md:max-w-4xl mt-8">
-  <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-5 gap-4">
 
     <%# コース説明部分 %>
-    <div class="col-span-1">
+    <div class="col-span-2">
       <div class="flex flex-col gap-2">
         <h1 class="text-2xl"><%= @course.title %></h1>
         <p class="break-words"><%= @course.body %></p>
@@ -39,7 +39,7 @@
       <div class="swiper courseShowSwiper">
         <div class="swiper-wrapper items-center">
           <% @course.main_images.each do |image| %>
-            <div class="swiper-slide w-full max-w-sm"><%= image_tag image, class: "w-full" %></div>
+            <div class="swiper-slide w-full max-w-xs"><%= image_tag image.variant(:course_show), class: "w-full rounded-lg" %></div>
           <% end %>
         </div>
       </div>
