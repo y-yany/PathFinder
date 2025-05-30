@@ -25,6 +25,7 @@ class Course < ApplicationRecord
     attachable.variant :course_show, resize_to_limit: [800, 800]
     attachable.variant :twitter_card, resize_to_limit: [800, 800]
   end
+  has_many :likes, dependent: :destroy
 
   validates :title, presence: true
   validates :body, length: { maximum: 1_000 }
