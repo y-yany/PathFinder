@@ -23,6 +23,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
   has_many :courses, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :uid, uniqueness: { scope: :provider }
