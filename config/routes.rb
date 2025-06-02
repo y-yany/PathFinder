@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # 認証
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -12,6 +13,9 @@ Rails.application.routes.draw do
   # コース
   resources :courses, only: %i[index new create show destroy] do
     get 'search', on: :collection
+
+    # いいね機能
+    resources :likes, only: %i[create destroy], shallow: true
   end
 
   # プライバシーポリシー
