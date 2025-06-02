@@ -9,5 +9,5 @@ class LikesController < ApplicationController
     like = Like.find(params[:id])
     like.destroy!
     redirect_to courses_path, status: :see_other
-  end  
+  end
 end
