@@ -37,4 +37,8 @@ class Course < ApplicationRecord
   scope :title_body_address_contain, ->(word) { where("title LIKE ? OR body LIKE ? OR address LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%") }
   scope :distance_greater_than, ->(distance) { where(distance: distance..) }
   scope :distance_less_than, ->(distance) { where(distance: ..distance) }
+
+  def liked_by?(user)
+    likes.exists?(user_id: user&.id)
+  end
 end

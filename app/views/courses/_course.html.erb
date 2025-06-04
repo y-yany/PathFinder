@@ -1,40 +1,43 @@
 <div id="course-id-<%= course.id %>">
   <div class="card sm:card-side w-full mt-8 rounded-lg hover:shadow-md hover:bg-slate-50">
     <div class="card-body w-2/3 hidden sm:flex">
-      <div class="flex">
-        <%# コースタイトル %>
-        <h2 class="card-title"><%= link_to course.title, course_path(course), class: "link link-hover" %></h2>
+      <%# コースタイトル %>
+      <h2 class="card-title"><%= link_to course.title, course_path(course), class: "link link-hover" %></h2>
 
-        <%# 削除ボタン %>
-        <% if current_user&.own?(course) %>
-          <%= link_to course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "ml-auto" do %>
-            <span class="material-icons text-primary">delete</span>
-          <% end %>
-        <% end %>
-      </div>
-
+      <%# コース本文 %>
       <p class="text-sm opacity-50 break-words"><%= course.body %></p>
 
-      <div class="flex justify-between mt-2">
+      <div class="flex justify-between my-2">
         <div class="card-actions">
           <%# 距離 %>
           <div class="badge badge-lg bg-slate-200 rounded-md gap-1">
             <span class="material-icons text-sm h-5">route</span>
             <span class="text-xs"><%= course.distance %> km</span>
           </div>
-
           <%# 住所 %>
           <div class="badge badge-lg bg-slate-200 rounded-md">
             <span class="material-icons text-sm h-5">location_on</span>
             <span class="text-xs"><%= truncate course.address.split[1], length: 10 %></span>
           </div>
-        </div>
 
-        <%# ユーザーネーム %>
-        <div class="flex justify-center gap-1">
-          <span class="material-icons">account_circle</span>
-          <span><%= course.user.name %></span>
+          <div class="flex items-center">
+            <% if current_user&.own?(course) %>
+              <%# 削除ボタン %>
+              <%= link_to course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "flex items-center" do %>
+                <span class="material-icons text-primary">delete</span>
+              <% end %>
+            <% else %>
+              <%# いいねボタン %>
+              <%= render "courses/like_button", course: course %>
+            <% end %>
+          </div>
         </div>
+      </div>
+
+      <%# ユーザーネーム %>
+      <div class="flex items-center gap-1 text-sm">
+        <span class="material-icons">account_circle</span>
+        <span><%= course.user.name %></span>
       </div>
     </div>
 

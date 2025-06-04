@@ -13,18 +13,28 @@
       </div>
       <ul>
         <div class="divider"></div>
-        <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(course_url(@course))}&hashtags=お散歩マップ,散歩", target: "_blank", title: "Xでシェア" do %>
-          <div class="btn btn-xs btn-circle">
-            <%= image_tag "x_twitter_mark.svg", class: "h-4" %>
-          </div>
-        <% end %>
+
+        <li class="flex items-center gap-1">
+          <%# Xシェア %>
+          <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(course_url(@course))}&hashtags=お散歩マップ,散歩", target: "_blank", title: "Xでシェア" do %>
+            <div class="btn btn-xs btn-circle mr-4">
+              <%= image_tag "x_twitter_mark.svg", class: "h-4" %>
+            </div>
+          <% end %>
+          <%# いいねボタン %>
+          <%= render "courses/like_button", course: @course %>
+        </li>
+
         <div class="divider"></div>
+
         <li class="flex">
           <span class="material-icons text-gray-400">turn_sharp_right</span>
           <p class="text-gray-400 mr-4">Distance</p>
           <p><%= @course.distance %> km</p>
         </li>
+
         <div class="divider"></div>
+
         <li class="flex">
           <span class="material-icons text-gray-400">location_on</span>
           <p class="text-gray-400 mr-4">Location</p>
@@ -34,7 +44,7 @@
       </ul>
     </div>
 
-    <%# コース写真・マップ・コメント %>
+    <%# コース写真 %>
     <div class="col-span-3">
       <div class="swiper courseShowSwiper">
         <div class="swiper-wrapper items-center">
@@ -48,6 +58,7 @@
 
   <div class="divider"></div>
 
+  <%# マップ %>
   <div class="grid grid-cols-1">
     <div class="h-[70vh]">
       <div id="show-map" class="w-full h-full"></div>
