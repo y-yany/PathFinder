@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "liked-button-for-course-#{ @course.id }" do %>
+  <%= render "courses/unlike", course: @course %>
+<% end %>
