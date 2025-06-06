@@ -38,6 +38,7 @@ class Course < ApplicationRecord
   scope :distance_greater_than, ->(distance) { where(distance: distance..) }
   scope :distance_less_than, ->(distance) { where(distance: ..distance) }
 
+  # いいね機能に関するメソッド
   def liked_by?(user)
     likes.exists?(user_id: user&.id)
   end
