@@ -1,0 +1,6 @@
+<div class="flex items-center" id="unliked-button-for-course-<%= course.id %>">
+  <%= link_to course_likes_path(course), data: { turbo_method: "post" } do %>
+    <span class="material-icons text-red-300">favorite_outline</span>
+  <% end %>
+  <span class="text-xs text-gray-400"><%= course.likes.size %></span>
+</div>

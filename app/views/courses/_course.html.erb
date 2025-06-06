@@ -20,17 +20,15 @@
             <span class="text-xs"><%= truncate course.address.split[1], length: 10 %></span>
           </div>
 
-          <div class="flex items-center">
-            <% if current_user&.own?(course) %>
-              <%# 削除ボタン %>
-              <%= link_to course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "flex items-center" do %>
-                <span class="material-icons text-primary">delete</span>
-              <% end %>
-            <% else %>
-              <%# いいねボタン %>
-              <%= render "courses/like_button", course: course %>
+          <% if current_user&.own?(course) %>
+            <%# 削除ボタン %>
+            <%= link_to course_path(course), data: { turbo_method: "delete", turbo_confirm: "削除してもよろしいでしょうか？" }, class: "flex items-center" do %>
+              <span class="material-icons text-primary">delete</span>
             <% end %>
-          </div>
+          <% else %>
+            <%# いいねボタン %>
+            <%= render "courses/like_button", course: course %>
+          <% end %>
         </div>
       </div>
 
