@@ -1,0 +1,6 @@
+<div class="flex items-center" id="liked-button-for-course-<%= course.id %>">
+  <%= link_to like_path(current_user.likes.find_by(course_id: course.id)), data: { turbo_method: "delete" } do %>
+    <span class="material-icons text-red-300">favorite</span>
+  <% end %>
+  <span class="text-xs text-gray-400"><%= course.likes.size %></span>
+</div>
