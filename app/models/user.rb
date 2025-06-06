@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   has_many :courses, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :liked_courses, through: :likes, source: :course
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :uid, uniqueness: { scope: :provider }
@@ -49,5 +50,14 @@ class User < ApplicationRecord
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
+  end
+
+  # いいね機能に関するメソッド
+  def like(course)
+    liked_courses << course
+  end
+
+  def unlike(course)
+    liked_courses.destroy(course)
   end
 end
