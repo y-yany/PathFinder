@@ -5,6 +5,8 @@
     <%= render "unlike", course: course %>
   <% end %>
 <% else %>
-  <span class="material-icons text-red-300">favorite_outline</span>
-  <span class="text-xs text-gray-400"><%= course.likes.size %></span>
+  <div class="flex items-center">
+    <span class="material-icons text-red-300">favorite_outline</span>
+    <span class="text-xs text-gray-400"><%= course.likes.size %></span>
+  </div>
 <% end %>
