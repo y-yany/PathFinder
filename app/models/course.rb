@@ -18,6 +18,7 @@
 #
 
 class Course < ApplicationRecord
+  # 関連付け
   belongs_to :user
   has_many :markers, dependent: :destroy
   has_many_attached :main_images do |attachable|
@@ -26,7 +27,9 @@ class Course < ApplicationRecord
     attachable.variant :twitter_card, resize_to_limit: [800, 800]
   end
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
+  # バリデーション
   validates :title, presence: true
   validates :body, length: { maximum: 1_000 }
   validates :distance, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 999.99 }
@@ -34,6 +37,7 @@ class Course < ApplicationRecord
   validates :encoded_polyline, presence: true, length: { maximum: 65_535 }
   validates :main_images, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 5_242_880 }
 
+  # スコープ
   scope :title_body_address_contain, ->(word) { where("title LIKE ? OR body LIKE ? OR address LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%") }
   scope :distance_greater_than, ->(distance) { where(distance: distance..) }
   scope :distance_less_than, ->(distance) { where(distance: ..distance) }
