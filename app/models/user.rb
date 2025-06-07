@@ -22,10 +22,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
+  # 関連付け
   has_many :courses, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_courses, through: :likes, source: :course
+  has_many :comments, dependent: :destroy
 
+  # バリデーション
   validates :name, presence: true, length: { maximum: 20 }
   validates :uid, uniqueness: { scope: :provider }
 
@@ -34,7 +37,7 @@ class User < ApplicationRecord
     id == object&.user_id
   end
 
-  # Google認証したユーザーを取得 or 作成
+  # Google認証に関するメソッド
   def self.from_omniauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
