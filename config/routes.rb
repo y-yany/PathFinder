@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
     # いいね機能
     resources :likes, only: %i[create destroy], shallow: true
+
+    # コメント機能
+    resources :comments, only: %i[create destroy], shallow: true
   end
 
   # プライバシーポリシー
