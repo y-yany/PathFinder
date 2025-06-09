@@ -64,6 +64,27 @@
       <div id="show-map" class="w-full h-full"></div>
     </div>
   </div>
+
+  <div class="divider"></div>
+
+  <%# コメント %>
+  <div class="grid grid-cols-1">
+    <%= form_with model: @comment, url: course_comments_path(@course) do |f| %>
+      <%= f.text_area :body, placeholder: t('.comment'), rows: 3, class: "textarea rounded-lg bg-slate-100 w-full" %>
+
+      <div class="flex justify-end">
+        <%= f.submit t('.comment_create'), class: "btn btn-primary rounded-lg text-white" %>
+      </div>
+    <% end %>
+
+    <% if @course.comments.present? %>
+      <ul class="bg-base-100 rounded-box shadow-lg p-4 my-4">
+        <%= render @comments %>
+      </ul>
+    <% else %>
+      <p class="text-sm my-4">コメントはまだありません</p>
+    <% end %>
+  </div>
 </div>
 
 <%= javascript_include_tag "show_gmap", "data-turbo-track": "reload" %>
