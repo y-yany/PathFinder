@@ -27,7 +27,10 @@ module Myapp
       g.test_framework nil
     end
 
-    # デフォルトのロケールを変更
+    # デフォルトの言語設定を日本語に設定
     config.i18n.default_locale = :ja
+
+    # タイムゾーンを東京に設定
+    config.time_zone = "Tokyo"
   end
 end

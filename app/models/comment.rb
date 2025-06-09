@@ -5,5 +5,4 @@ class Comment < ApplicationRecord
 
   # バリデーション
   validates :body, presence: true, length: { maximum: 1_000 }
-  validates :user_id, uniqueness: { scope: :course_id }
 end

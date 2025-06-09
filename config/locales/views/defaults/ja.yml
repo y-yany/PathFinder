@@ -1,4 +1,7 @@
 ja:
+  time:
+    formats:
+      short: "%Y/%m/%d %H:%M"
   header:
     course_index: コース一覧
     course_create: コース作成
