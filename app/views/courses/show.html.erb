@@ -72,7 +72,7 @@
     <%= render "comments/form", comment: @comment, course: @course %>
 
     <% if @course.comments.present? %>
-      <ul class="bg-base-100 rounded-box shadow-lg p-4 my-4">
+      <ul id="comments" class="bg-base-100 rounded-box shadow-lg p-4 my-4">
         <%= render @comments %>
       </ul>
     <% else %>
