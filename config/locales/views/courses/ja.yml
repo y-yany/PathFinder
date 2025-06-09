@@ -11,3 +11,5 @@ ja:
     show:
       title: コース詳細
       to_course_index: コース一覧へ
+      comment: コメントを投稿する
+      comment_create: 投稿
