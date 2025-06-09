@@ -1,0 +1,16 @@
+<% if @comment.errors.any? %>
+  <%# フォームを更新 %>
+  <%= turbo_stream.replace "comment-form" do %>
+    <%= render "form", comment: @comment, course: @comment.course %>
+  <% end %>
+<% else %>
+  <%# コメントを追加 %>
+  <%= turbo_stream.prepend "comments" do %>
+    <%= render "comment", comment: @comment %>
+  <% end %>
+
+  <%# フォームを更新 %>
+  <%= turbo_stream.replace "comment-form" do %>
+    <%= render "form", comment: Comment.new, course: @comment.course %>
+  <% end %>
+<% end %>
