@@ -69,13 +69,7 @@
 
   <%# コメント %>
   <div class="grid grid-cols-1">
-    <%= form_with model: @comment, url: course_comments_path(@course) do |f| %>
-      <%= f.text_area :body, placeholder: t('.comment'), rows: 3, class: "textarea rounded-lg bg-slate-100 w-full" %>
-
-      <div class="flex justify-end">
-        <%= f.submit t('.comment_create'), class: "btn btn-primary rounded-lg text-white" %>
-      </div>
-    <% end %>
+    <%= render "comments/form", comment: @comment, course: @course %>
 
     <% if @course.comments.present? %>
       <ul class="bg-base-100 rounded-box shadow-lg p-4 my-4">
