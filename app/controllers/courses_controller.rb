@@ -25,7 +25,6 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     set_course_data(@course)
-    @comment = Comment.new
     @comments = @course.comments.includes(:user).order(created_at: :desc)
   end
 

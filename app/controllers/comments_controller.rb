@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+  def new
+    @comment = Comment.new
+    @course = Course.find(params[:course_id])
+  end
+
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.save

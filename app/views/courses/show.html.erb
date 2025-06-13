@@ -11,18 +11,21 @@
         <h1 class="text-2xl"><%= @course.title %></h1>
         <p class="break-words"><%= @course.body %></p>
       </div>
-      <ul>
-        <div class="divider"></div>
 
-        <li class="flex items-start gap-1">
+      <div class="divider"></div>
+
+      <ul>
+        <li class="flex items-start gap-6">
           <%# Xシェア %>
           <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(course_url(@course))}&hashtags=お散歩マップ,散歩", target: "_blank", title: "Xでシェア" do %>
-            <div class="btn btn-xs btn-circle mr-4">
+            <div class="btn btn-xs btn-circle">
               <%= image_tag "x_twitter_mark.svg", class: "h-4" %>
             </div>
           <% end %>
           <%# いいねボタン %>
           <%= render "courses/like_button", course: @course %>
+          <%# コメント投稿用リンク %>
+          <%= render "courses/comment_button", course: @course %>
         </li>
 
         <div class="divider"></div>
@@ -55,8 +58,6 @@
       </div>
     </div>
   </div>
-
-  <div class="divider"></div>
 
   <%# マップ %>
   <div class="grid grid-cols-1">
