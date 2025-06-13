@@ -1,1 +1,10 @@
+<%# コメント削除 %>
 <%= turbo_stream.remove "comment-#{ @comment.id }" %>
+
+<%# コメント数を更新 %>
+<%= turbo_stream.replace "comment-size" do %>
+  <%= render "courses/comment_button", course: @comment.course %>
+<% end %>
+<%= turbo_stream.replace "comment-tab" do %>
+  <input type="radio" id="comment-tab" name="course_tabs" class="tab px-8" aria-label="コメント <%= @comment.course.comments.size %>件" checked />
+<% end %>
