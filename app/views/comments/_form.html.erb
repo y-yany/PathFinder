@@ -1,7 +1,7 @@
-<%= form_with model: comment, url: course_comments_path(course), id: "comment-form" do |f| %>
-  <%= f.text_area :body, placeholder: t('courses.show.comment'), rows: 3, class: "textarea rounded-lg bg-slate-100 w-full" %>
-
-  <div class="flex justify-end">
-    <%= f.submit t('courses.show.comment_create'), class: "btn btn-primary rounded-lg text-white" %>
+<%= form_with model: comment, url: course_comments_path(course), id: "comment-form", data: { action: "turbo:submit-end->modal#close" } do |f| %>
+  <div class="mb-3">
+    <%= f.text_area :body, placeholder: t('courses.show.comment'), rows: 3, class: "textarea rounded-lg bg-slate-100 w-full" %>
   </div>
+
+  <%= f.submit t('courses.show.comment_create'), class: "btn btn-sm btn-primary rounded-lg text-white w-full" %>
 <% end %>

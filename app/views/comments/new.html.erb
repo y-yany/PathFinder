@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "modal" do %>
+  <dialog class="modal sm:modal-middle" data-controller="modal" data-modal-target="modal">
+    <div class="modal-box">
+      <div class="flex justify-end">
+        <div class="btn btn-sm btn-circle btn-ghost" data-action="click->modal#closeModal">
+          <span class="material-icons">close</span>
+        </div>
+      </div>
+      <div class="m-4">
+        <%= render "comments/form", comment: @comment, course: @course %>
+      </div>
+    </div>
+  </dialog>
+<% end %>

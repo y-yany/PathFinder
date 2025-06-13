@@ -1,0 +1,17 @@
+<div id="comment-size">
+  <% if user_signed_in? %>
+    <%= link_to new_course_comment_path(course), data: { turbo_frame: "modal" }, title: "コメントを投稿" do %>
+      <div class="flex items-end text-gray-400">
+        <span class="material-icons">chat</span>
+        <span class="text-xs"><%= course.comments.size %></span>
+      </div>
+    <% end %>
+  <% else %>
+    <%= link_to new_course_comment_path(course) do %>
+      <div class="flex items-end text-gray-400">
+        <span class="material-icons">chat</span>
+        <span class="text-xs"><%= course.comments.size %></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>
