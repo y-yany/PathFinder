@@ -1,4 +1,8 @@
 ja:
+  defaults:
+    flash_message:
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新できませんでした"
   time:
     formats:
       short: "%Y/%m/%d %H:%M"
