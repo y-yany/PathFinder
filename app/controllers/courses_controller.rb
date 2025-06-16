@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show search]
-  before_action :set_map_id, only: %i[new show]
 
   def index
     @q = SearchCoursesForm.new(search_params)
@@ -46,10 +45,6 @@ class CoursesController < ApplicationController
 
   def course_marker_params
     params.require(:course_marker_form).permit(:title, :body, :distance, :address, :encoded_polyline, :positions, main_images: []).merge(user_id: current_user.id)
-  end
-
-  def set_map_id
-    gon.google_map_id = Rails.application.credentials.google_maps_mapId
   end
 
   def set_course_data(course)
