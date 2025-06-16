@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_courses, through: :likes, source: :course
   has_many :comments, dependent: :destroy
+  has_one_attached :avatar
 
   # バリデーション
   validates :name, presence: true, length: { maximum: 20 }
