@@ -1,4 +1,7 @@
 ja:
+  activerecord:
+    models:
+      course: コース
   activemodel:
     attributes:
       course_marker_form:

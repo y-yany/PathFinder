@@ -15,9 +15,9 @@ class CoursesController < ApplicationController
     @course_marker_form = CourseMarkerForm.new(course_marker_params)
     course = @course_marker_form.save
     if course
-      redirect_to course_path(id: course.id), success: "コースを作成しました"
+      redirect_to course_path(id: course.id), success: t('defaults.flash_message.created', item: Course.model_name.human)
     else
-      flash.now[:error] = "コースを作成できませんでした"
+      flash.now[:error] = t('defaults.flash_message.not_created', item: Course.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
   def destroy
     @course = current_user.courses.find(params[:id])
     @course.destroy!
-    redirect_to courses_path, success: "コースを削除しました", status: :see_other
+    redirect_to courses_path, success: t('defaults.flash_message.deleted', item: Course.model_name.human), status: :see_other
   end
 
   def search
