@@ -31,7 +31,9 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true, length: { maximum: 20 }
   validates :uid, uniqueness: { scope: :provider }
-
+  validates :avatar, attachment: { purge: true, content_type: %r{\Aimage/(jpg|png|jpeg)\Z}, maximum: 5_242_880 }
+  validates :profile, length: { maximum: 1_000 }
+  
   # ユーザー自身のオブジェクトか確認するメソッド
   def own?(object)
     id == object&.user_id
