@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :comments, only: %i[new create destroy], shallow: true
   end
 
+  # プロフィール
+  resource :profile, only: %i[show edit update]
+
   # プライバシーポリシー
   get 'privacy_policy', to: 'home#privacy_policy'
 
