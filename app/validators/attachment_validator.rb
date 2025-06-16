@@ -12,6 +12,8 @@ class AttachmentValidator < ActiveModel::EachValidator
           has_error = true unless validate_content_type(record, attribute, file)
           break
         end
+      else
+        has_error = true unless validate_content_type(record, attribute, value)
       end
     end
 
@@ -21,6 +23,8 @@ class AttachmentValidator < ActiveModel::EachValidator
           has_error = true unless validate_maximum(record, attribute, file)
           break
         end
+      else
+        has_error = true unless validate_maximum(record, attribute, value)
       end
     end
 
