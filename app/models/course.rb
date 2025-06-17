@@ -38,7 +38,7 @@ class Course < ApplicationRecord
   validates :main_images, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 5_242_880 }
 
   # スコープ
-  scope :title_body_address_contain, ->(word) { where("title LIKE ? OR body LIKE ? OR address LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%") }
+  scope :title_body_address_contain, ->(word) { where('title LIKE ? OR body LIKE ? OR address LIKE ?', "%#{word}%", "%#{word}%", "%#{word}%") }
   scope :distance_greater_than, ->(distance) { where(distance: distance..) }
   scope :distance_less_than, ->(distance) { where(distance: ..distance) }
 

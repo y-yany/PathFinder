@@ -19,4 +19,4 @@ Lint/UselessMethodDefinition:
 # Configuration parameters: ConsistentQuotesInMultiline.
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes

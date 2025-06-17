@@ -15,7 +15,7 @@ class CourseMarkerForm
 
   # バリデーション
   validates :title, presence: true
-  validates :encoded_polyline, presence: { message: "を作成してください" }
+  validates :encoded_polyline, presence: { message: 'を作成してください' }
   validates :user_id, presence: true
 
   def save
