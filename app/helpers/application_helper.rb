@@ -2,25 +2,25 @@ module ApplicationHelper
   # デフォルトのmetaタグ
   def default_meta_tags
     {
-      site: "お散歩マップ",
-      title: "お散歩マップ",
+      site: 'お散歩マップ',
+      title: 'お散歩マップ',
       reverse: true,
-      charset: "utf-8",
-      description: "散歩コース共有を目的としたアプリです",
+      charset: 'utf-8',
+      description: '散歩コース共有を目的としたアプリです',
       canonical: request.original_url, # サイトの正規url
-      separator: "|",
+      separator: '|',
       og: {
-        site_name: "お散歩マップ",
-        title: "お散歩マップ",
-        description: "散歩コース共有を目的としたアプリです",
-        type: "website", # ページの種類
+        site_name: 'お散歩マップ',
+        title: 'お散歩マップ',
+        description: '散歩コース共有を目的としたアプリです',
+        type: 'website', # ページの種類
         url: request.original_url,
-        image: image_url("default_share.png"),
-        local: "ja-JP" # 言語と地域
+        image: image_url('default_share.png'),
+        local: 'ja-JP' # 言語と地域
       },
       twitter: {
-        card: "summary",
-        image: image_url("default_share.png")
+        card: 'summary',
+        image: image_url('default_share.png')
       }
     }
   end
@@ -45,10 +45,10 @@ module ApplicationHelper
   # フラッシュメッセージのスタイル
   def flash_style(type)
     case type
-    when "notice", "success"
-      "bg-success/80 text-white"
-    when "error", "alert"
-      "bg-error/80 text-white"
+    when 'notice', 'success'
+      'bg-success/80 text-white'
+    when 'error', 'alert'
+      'bg-error/80 text-white'
     end
   end
 end

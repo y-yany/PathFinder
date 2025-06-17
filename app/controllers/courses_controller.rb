@@ -34,8 +34,8 @@ class CoursesController < ApplicationController
   end
 
   def search
-    @title_match_courses = Course.where("title LIKE ?", "%#{params[:q]}%")
-    @address_match_courses = Course.where("address LIKE ?", "%#{params[:q]}%")
+    @title_match_courses = Course.where('title LIKE ?', "%#{params[:q]}%")
+    @address_match_courses = Course.where('address LIKE ?', "%#{params[:q]}%")
     respond_to do |format|
       format.js
     end
